@@ -27,84 +27,14 @@ The experiments numerically validate the theoretical asymptotic properties deriv
 ```text
 .
 ├── experiments/
-│   └── simulation.py
+│   ├── simulation.py
+│   └── outputs/
 │
-├── figures/
-│   ├── fig_e1_identity_scaling.pdf
-│   ├── fig_e2_time_scaling.pdf
-│   ├── fig_e3_marginal_cost.pdf
-│   ├── fig_e4_coordination.pdf
-│   └── fig2_theorem_validation.pdf
+├── paper/
+│   ├── document.tex
+│   ├── document.pdf
+│   └── references.bib
 │
-└── paper/
-    ├── document.tex
-    ├── document.pdf
-    └── references.bib
-```
-
----
-
-## Experiments
-
-### E1 — Identity Scaling
-
-Evaluates adversarial cost growth as the number of identities increases.
-
-### E2 — Time Horizon Scaling
-
-Analyzes cost behavior as governance participation extends over time.
-
-### E3 — Marginal Identity Cost
-
-Measures the incremental cost of adding new adversarial identities.
-
-### E4 — Coordination Robustness
-
-Compares different coordination-overhead models under bounded throughput assumptions.
-
----
-
-## Running the Simulation
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run experiments:
-
-```bash
-python experiments/simulation.py
-```
-
-Generated figures are saved automatically.
-
----
-
-## Research Context
-
-This project explores governance systems in which participation cost cannot be perfectly amortized across time windows.
-
-The simulations illustrate the asymptotic distinction between:
-
-- Parallelizable adversarial models
-- Throughput-bounded participation systems
-
----
-
-## Figures
-
-The repository includes generated evaluation figures in:
-
-```text
-figures/
-```
-
-These figures reproduce the experimental results discussed in the paper.
-
----
-
-## License
-
-MIT License.
+├── README.md
+├── requirements.txt
+└── .gitignore
