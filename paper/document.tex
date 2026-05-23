@@ -32,10 +32,28 @@
 % =========================
 % Title
 % =========================
-\title{The Geometry of Adversarial Identity Cost:
-	Structural Limits of Sybil Resistance in Open Systems}
+\title{Structural Limits of Adversarial Identity Scaling
+	in Open Systems: An Axiomatic Resource-Cost Framework}
 
-\author{Anonymous Author(s)}
+\author{%
+	\IEEEauthorblockN{%
+		Homayoun Maleki\IEEEauthorrefmark{1},\;
+		Nekane Sainz\IEEEauthorrefmark{1},\;
+		Jon Legarda\IEEEauthorrefmark{1},\;
+		and Igor Santos-Grueiro\IEEEauthorrefmark{2}}
+	
+	\IEEEauthorblockA{%
+		\IEEEauthorrefmark{1}DeustoTech, University of Deusto,
+		Bilbao, Spain\\
+		\textit{h.maleki@deusto.es,\;
+			nekane.sainz@deusto.es,\;
+			jlegarda@deusto.es}}
+	
+	\IEEEauthorblockA{%
+		\IEEEauthorrefmark{2}International University of
+		La Rioja (UNIR), Logroño, Spain\\
+		\textit{igor.email@placeholder.com}}
+}
 
 \begin{document}
 	
@@ -60,7 +78,7 @@
 		
 		This paper develops an axiomatic framework for analyzing
 		security-weighting resources through the lens of
-		\emph{adversarial cost geometry}.
+		\emph{adversarial cost scaling}.
 		We identify a small set of resource properties---including
 		divisibility, additivity of influence, temporal reusability,
 		identity transferability, and throughput boundedness---that
@@ -80,159 +98,204 @@
 		Under the assumptions considered here, protocol rules that
 		redistribute a fully divisible and reusable resource
 		may be insufficient to enforce linear per-identity cost.
-		The framework is intended as a resource-centric asymptotic lens
-		that complements existing deployment-level and protocol-level
-		analyses rather than replacing them.
-		We accompany the theoretical results with analytical illustrations
-		of the scaling regimes across varying identity counts,
-		time horizons, and coordination overhead models.
+		The framework complements existing deployment-level and protocol-level
+		analyses.
+		Analytical illustrations accompany the theoretical results.
 		
 	\end{abstract}
 	
 	
 	\begin{IEEEkeywords}
 		Sybil attacks, adversarial cost models, distributed security,
-		resource parallelizability, identity scaling.
+		permissionless systems, decentralized governance, identity scaling.
 	\end{IEEEkeywords}
 	% ============================================================
 	\section{Introduction}
 	
+	Sybil resistance is a foundational requirement in open and
+	permissionless systems.
+	Existing approaches typically regulate adversarial influence
+	by associating participation with scarce resources such as
+	computational effort or financial stake.
+	While such mechanisms are commonly analyzed in terms of
+	aggregate adversarial resource ownership, many security-critical
+	operations depend on the scaling behavior of identity-level
+	participation cost.
+	
+	This paper develops a structural framework for analyzing
+	how the properties of a security resource determine the
+	asymptotic structure of adversarial identity scaling.
+	
 	\subsection{Motivation}
 	
-	Open and permissionless systems must regulate influence under adversarial
-	conditions in which identity creation is inexpensive and effectively
-	unbounded.
+	Open and permissionless systems must regulate participation
+	under adversarial conditions in which identity creation is
+	inexpensive and effectively unbounded.
 	The classical formulation of this problem is the Sybil
-	attack~\cite{douceur2002sybil}, where a single adversarial entity
-	generates multiple identities to amplify control over a distributed system.
-	This vulnerability affects peer-to-peer overlays, blockchain
-	consensus~\cite{lamport1982byzantine,fischer1985flp,castro1999pbft,garay2015backbone,ren2019nakamoto},
+	attack~\cite{douceur2002sybil}, where a single adversarial
+	entity generates multiple identities to amplify influence
+	within a distributed system.
+	This challenge affects blockchain consensus,
 	decentralized governance, reputation systems,
-	and distributed access-control
-	frameworks~\cite{bonneau2015sok,narayanan2016bitcoinbook,gencer2018decentralization,decker2013information}.
+	committee selection, and distributed access-control
+	mechanisms~\cite{lamport1982byzantine,fischer1985flp,
+		castro1999pbft,garay2015backbone,ren2019nakamoto,
+		bonneau2015sok,narayanan2016bitcoinbook,
+		gencer2018decentralization,decker2013information}.
 	
-	A dominant design paradigm mitigates Sybil attacks by binding influence
-	to the possession or expenditure of a scarce resource.
-	Proof-of-Work (PoW) associates block-production probability with
-	computational effort~\cite{garay2015backbone},
-	while Proof-of-Stake (PoS) binds influence to locked financial capital
-	\cite{kiayias2017ouroboros}.
-	Such mechanisms have been analyzed under partially synchronous network
-	models, yielding safety and liveness guarantees in terms of aggregate
-	adversarial resource
-	ownership~\cite{dwork1988partial,garay2015backbone,kiayias2017ouroboros}.
+	A common mitigation strategy binds influence to the
+	possession or expenditure of a scarce resource.
+	Proof-of-Work associates influence with computational
+	effort~\cite{garay2015backbone},
+	while Proof-of-Stake binds participation to financial
+	capital~\cite{kiayias2017ouroboros}.
+	Such mechanisms are typically analyzed in terms of aggregate
+	resource ownership and adversarial thresholds.
 	
-	However, many security-critical operations in open systems function at
-	the \emph{identity layer} rather than the resource layer.
-	Examples include decentralized governance~\cite{buterin2014dao},
-	committee selection~\cite{gilad2017algorand},
-	reputation systems~\cite{resnick2000reputation},
-	rate-limited participation~\cite{li2017sybilcontrol},
-	and identity-based access control.
-	In these settings, the relevant security question shifts from how much
-	resource an adversary controls in aggregate to how the cost of
-	\emph{sustaining multiple identities} scales with their number and the
-	duration of participation.
+	However, many security-sensitive operations in open systems
+	operate at the identity layer rather than the aggregate
+	resource layer.
+	Examples include governance participation,
+	committee sampling, rate-limited interaction,
+	and identity-scoped access control.
+	In these settings, the relevant question is not only how much
+	resource an adversary controls in aggregate, but how the cost
+	of sustaining many identities scales with both the number of
+	identities and the duration of participation.
 	
 	\medskip
 	\noindent
 	\textbf{A Resource-Structural Perspective.}
-	A frequently implicit property of widely deployed resources is that
-	they are \emph{divisible and reusable}: computational capacity and
-	financial capital can be subdivided, delegated, and reapplied across
-	identities without proportional marginal expenditure.
-	Mining pools in PoW and stake delegation in PoS illustrate this---once
-	aggregate resource ownership is acquired, it can be redistributed across
-	arbitrarily many identities while preserving total
-	influence~\cite{rosenfeld2011analysis,gencer2018decentralization,
+	Many widely deployed security resources are divisible and
+	reusable.
+	Computational capacity and financial stake can often be
+	partitioned, delegated, and reused across identities while
+	preserving aggregate influence.
+	Mining pools and stake delegation illustrate this property:
+	once aggregate resource ownership is acquired, it may be
+	redistributed across many identities without proportional
+	renewal cost~\cite{rosenfeld2011analysis,
+		gencer2018decentralization,
 		kiayias2017ouroboros,saleh2021blockchain}.
-	As a result, adversarial effort may be \emph{amortized across
-		identities}: a single adversary can sustain many identities while
-	incurring only slowly growing marginal cost.
 	
-	This observation reveals an asymptotic limitation of scarcity-based
-	defenses not captured by existing analyses.
-	Economic models focus on equilibrium cost-of-corruption
-	\cite{budish2018economic,budish2024economic},
-	while protocol-level analyses focus on aggregate adversarial
-	influence~\cite{miller2016honeybadger,sompolinsky2015ghost}.
-	Neither framework isolates the resource properties that govern how
-	adversarial cost scales with the number of sustained identities.
-	
-	This motivates the following question:
+	This motivates a resource-centric perspective on Sybil
+	resistance:
+	rather than focusing exclusively on aggregate adversarial
+	ownership, we study how the structural properties of a
+	security resource determine the asymptotic scaling behavior
+	of sustained identity cost.
 	
 	\begin{quote}
-		\emph{What properties must a security resource possess
-			for sustained adversarial cost to grow proportionally
-			with the number of active identities?}
+		\emph{What structural properties must a security resource
+			satisfy for adversarial participation cost to grow
+			proportionally with the number of sustained identities?}
 	\end{quote}
 	
 	\subsection{Contribution and Framing}
 	
-	This paper develops a resource-centric asymptotic lens for analyzing
-	identity-level Sybil resistance.
-	The objective is not to replace deployment-specific or protocol-level
-	security analyses, but to isolate how the structural properties of a
-	security-weighting resource determine the asymptotic geometry of
-	adversarial identity cost.
-	The framework is intended to complement existing analyses---including
-	aggregate-resource consensus models and economic equilibrium
-	analyses---by identifying when divisibility and reusability enable
-	adversarial cost amortization.
+	This paper develops a structural framework for analyzing
+	adversarial identity scaling in open systems.
+	The objective is not to replace deployment-specific security
+	analyses, but to isolate how resource structure influences
+	the asymptotic scaling of sustained participation cost.
 	
-	Under a standard amortized coordination model,
-	we establish an asymptotic boundary between two resource classes:
+	\medskip
+	\noindent\textbf{On the nature of the contribution.}
+	The results of this paper are not complexity-theoretic hardness
+	results, probabilistic consensus analyses, or cryptographic
+	impossibility proofs.
+	The contribution is a \emph{structural characterization}:
+	we identify a minimal set of resource properties whose
+	presence or absence determines whether adversarial identity
+	cost scales sublinearly or linearly with sustained participation.
+	The novelty lies not in the asymptotic machinery itself,
+	but in the \emph{isolation of sufficient structural conditions}
+	that separate amortizable from throughput-bounded identity
+	regimes---a distinction that existing aggregate-resource models,
+	admission-based defenses, and economic equilibrium analyses
+	do not capture.
+	Prior to this framework, to the best of our knowledge,
+	no unified abstraction classified
+	heterogeneous Sybil-resistance mechanisms (PoW, PoS,
+	device-bound execution, human participation) according to the
+	asymptotic identity-scaling behavior they imply.
+	The framework provides this classification.
+	
+	Under an amortized coordination model,
+	we establish an asymptotic separation between two broad
+	resource classes:
 	
 	\begin{itemize}
-		\item Resources satisfying \emph{divisibility, additivity,
-			transferability, and temporal reuse}
-		admit identity amortization within the considered model,
-		yielding $C(s,T) = o(sT)$.
 		
-		\item Resources that are \emph{rate-limited}, non-transferable,
-		and window-local indicate the scaling regime
-		$C(s,T) = \Omega(sT)$.
+		\item Resources satisfying divisibility,
+		transferability, additivity of influence,
+		and temporal reuse admit identity amortization
+		within the considered abstraction,
+		yielding
+		\[
+		C(s,T)=o(sT).
+		\]
+		
+		\item Resources that are throughput-bounded,
+		non-transferable, and window-local induce the regime
+		\[
+		C(s,T)=\Omega(sT).
+		\]
+		
 	\end{itemize}
 	
-	Within the considered model, this boundary reflects the resource class
-	of the underlying mechanism rather than its protocol-level design.
-	Fully divisible and reusable resources admit sublinear per-identity
-	cost regardless of the protocol rules designed around them, within the present abstraction.
-	Rate-limited, non-transferable resources, by contrast, impose
-	per-identity participation constraints that resist amortization.
+	Within the present framework, the resulting scaling behavior
+	is primarily governed by the structural properties of the
+	underlying resource class rather than protocol syntax alone.
+	Divisible reusable resources may permit adversarial cost
+	amortization, whereas throughput-bounded participation
+	constraints resist identity reuse across time windows.
+	Importantly, hybrid systems combining both classes inherit
+	the linear lower bound whenever a throughput-bounded component
+	is present (Lemma~5), making this result practically relevant
+	for governance and access-control protocol design.
 	
-	As a secondary implication, divisibility and reusability induce
-	\emph{centralization pressure}: because resource aggregation does not
-	incur proportional identity-level cost, participants are incentivized
-	to pool or delegate, consistent with empirically observed behavior in
-	mining pools and delegation markets~\cite{bonneau2015sok,bano2019consensus}.
+	The framework is intended as a complementary analytical lens
+	alongside protocol-level and economic security analyses.
 	
 	\subsection{Contributions}
 	
 	\begin{itemize}
 		
 		\item \textbf{Axiomatic Resource Framework.}
-		We introduce a framework based on properties including
-		divisibility, additivity of influence, temporal reusability,
-		identity transferability, and throughput boundedness.
+		We introduce a framework based on structural resource
+		properties including divisibility, transferability,
+		temporal reuse, additivity of influence,
+		and throughput boundedness.
 		
-		\item \textbf{Asymptotic Limit for Divisible Resources.}
-		We establish that mechanisms grounded in fully divisible,
-		reusable resources admit identity amortization within the
-		considered model, yielding $C(s,T)=o(sT)$.
+		\item \textbf{Asymptotic Characterization of Divisible Resources.}
+		We establish that fully divisible and reusable resources
+		admit identity amortization within the considered model,
+		yielding
+		$C(s,T)=o(sT)$.
 		
-		\item \textbf{Linear Lower Bound for Rate-Limited Resources.}
-		We establish that throughput-bounded, non-transferable resources
-		imply $C(s,T)=\Omega(sT)$.
+		\item \textbf{Linear Scaling Bound for Throughput-Limited Resources.}
+		We establish that throughput-bounded,
+		non-transferable participation resources imply
+		$C(s,T)=\Omega(sT)$.
 		
-		\item \textbf{Asymptotic Scaling Separation.}
-		We establish that the two resource classes induce
-		asymptotically disjoint cost regimes under the boundary
-		conditions characterized in this work.
+		\item \textbf{Hybrid Resource Composition (Lemma~5).}
+		For systems combining divisible and throughput-bounded
+		resource components, we show that the throughput-bounded
+		component dominates asymptotically under additive
+		decomposition, preserving the linear lower bound.
+		This result is practically relevant for hybrid governance
+		and access-control protocols.
 		
-		\item \textbf{Design Implications.}
-		Under the considered model, identity-level cost scaling is
-		constrained by resource structure rather than protocol syntax.
+		\item \textbf{Scaling Separation.}
+		We characterize an asymptotic separation between the
+		two resource classes under the assumptions formalized
+		in this work.
+		
+		\item \textbf{Implications for Open-System Design.}
+		The framework highlights how identity-level security
+		depends jointly on protocol rules and the structural
+		properties of the underlying security resource.
 		
 	\end{itemize}
 	
@@ -240,12 +303,15 @@
 	
 	Section~II reviews related work.
 	Section~III introduces the system model.
-	Section~IV formalizes the axiomatic framework.
-	Sections~V and VI establish the main bounds.
-	Section~VII proves the scaling separation theorem.
-	Section~VIII presents concrete resource instantiations.
-	Sections~IX and X discuss implications and limitations.
-	Section~XI presents analytical illustrations of the scaling regimes.
+	Section~IV formalizes the resource framework.
+	Sections~V and VI establish the main asymptotic bounds.
+	Section~VII presents the scaling separation theorem.
+	Section~VIII discusses concrete resource instantiations
+	and provides lightweight systems anchoring.
+	Sections~IX and X examine adversarial implications and
+	limitations.
+	Section~XI presents analytical illustrations of the
+	scaling regimes.
 	% ============================================================
 	\section{Related Work}
 	
@@ -378,124 +444,51 @@
 	More generally, these approaches constrain the \emph{placement}
 	of identities within a social graph, but do not characterize
 	the \emph{cost of sustaining identities} as their number grows.
-	\subsection{Randomness and Committee Sampling}
+	\subsection{Randomness, Committees, and Human-Centric Mechanisms}
 	
-	Leader election and committee sampling mechanisms
-	often rely on cryptographic randomness primitives.
-	Verifiable random functions (VRFs) \cite{micali1999vrf}
-	enable unpredictable leader selection,
-	while bias-resistant randomness protocols
-	\cite{syta2017scalable}
-	enable robust distributed randomness generation.
-	
-	Composable analyses of blockchain protocols
+	Cryptographic randomness primitives such as
+	VRFs~\cite{micali1999vrf} and bias-resistant
+	beacons~\cite{syta2017scalable} improve scalability and
+	fairness of leader selection.
+	Composable blockchain analyses
 	\cite{garay2015backbone,pass2017hybrid,pass2016snowwhite}
-	demonstrate robustness under dynamic participation
-	and partially synchronous networks.
-	More recent asynchronous constructions such as
-	HoneyBadgerBFT \cite{miller2016honeybadger}
-	illustrate that scalable consensus can be achieved
-	without strong synchrony assumptions.
+	and asynchronous protocols such as
+	HoneyBadgerBFT~\cite{miller2016honeybadger}
+	extend these guarantees under weaker timing assumptions.
+	However, these mechanisms model adversarial capability in
+	terms of aggregate resource ownership; randomness primitives
+	do not alter the divisibility or transferability of the
+	underlying resource.
 	
-	Nevertheless, these mechanisms continue to model
-	adversarial capability in terms of aggregate resource ownership.
-	Randomness primitives improve scalability and fairness
-	of leader selection but do not alter the structural
-	divisibility or transferability of the underlying resource.
+	Human-centric mechanisms such as
+	Proof-of-Personhood~\cite{borge2017pop} and
+	pseudonym parties~\cite{ford2020pseudonym}
+	bind credentials to real-world participants to restrict
+	identity creation.
+	These approaches address identity admission rather than
+	sustained participation cost; once admitted, influence
+	may still be governed by transferable resources.
 	
-	\subsection{Human-Centric Identity Mechanisms}
+	Capability architectures~\cite{levy1984capability},
+	congestion control~\cite{jacobson1988congestion},
+	and hardware-rooted execution environments such as
+	Intel SGX~\cite{costan2016intel} impose per-actor throughput
+	limits, but are typically analyzed in terms of access control
+	or network stability rather than adversarial identity-scaling
+	cost.
 	
-	Human-centric approaches attempt to enforce
-	one-person--one-identity mappings through
-	physical ceremonies, biometric verification,
-	or behavioral signals.
-	Proof-of-Personhood protocols \cite{borge2017pop}
-	represent one prominent example,
-	while later work explores pseudonym parties
-	and social identity verification mechanisms
-	\cite{ford2020pseudonym}.
+	\subsection{Positioning}
 	
-	Such systems aim to restrict identity creation
-	by binding credentials to real-world participants.
-	However, these mechanisms primarily address
-	identity admission rather than sustained participation.
-	Once identities are admitted,
-	influence may still be governed by reusable
-	or transferable resources.
-	
-	Consequently, identity admission mechanisms alone
-	do not guarantee linear adversarial cost over time.
-	
-	\subsection{Rate Limiting and Capability Systems}
-	
-	Systems research has long studied per-actor resource constraints.
-	Capability-based security architectures
-	\cite{levy1984capability}
-	limit authority through unforgeable tokens,
-	while congestion-control algorithms
-	\cite{jacobson1988congestion}
-	regulate per-flow network throughput.
-	
-	More recent hardware-based security architectures,
-	including trusted execution environments such as
-	Intel SGX \cite{costan2016intel},
-	enable systems to bind computation to specific devices
-	or execution contexts, enforcing hardware-rooted execution constraints.
-	
-	Such mechanisms impose intrinsic limits on per-identity or per-device
-	throughput, effectively restricting the rate at which independent
-	participants can generate verifiable activity.
-	
-	Although these frameworks effectively enforce
-	per-actor or per-device rate limits,
-	they are typically analyzed in terms of access control,
-	network stability, or trusted hardware guarantees
-	rather than adversarial identity scaling.
-	
-	\subsection{Positioning of This Work}
-	This paper departs from prior research in two key ways.
-	First, rather than analyzing specific protocols or admission
-	mechanisms, we develop an axiomatic theory of
-	\emph{security-weighting resources}.
-	We formalize structural properties such as
-	divisibility,
-	additivity of influence,
-	temporal reusability,
-	identity transferability,
-	and throughput boundedness,
-	and analyze how these properties determine
-	the geometry of adversarial cost.
-	Second, we establish a structural separation at the extremal
-	boundary conditions between resource classes.
-	Parallelizable resources induce sublinear sustained identity
-	cost within the present model,
-	whereas throughput-bounded,
-	non-transferable, window-local resources enforce
-	\[
-	C(s,T)=\Omega(sT).
-	\]
-	Unlike prior work on cost-of-corruption or equilibrium
-	security~\cite{budish2018economic,budish2024economic}, our framework does not
-	analyze the economic threshold required to corrupt a protocol
-	instance. Instead, it studies how the structural properties of
-	the underlying resource determine the asymptotic cost of
-	sustaining multiple identities over time. Existing economic
-	analyses characterize aggregate adversarial expenditure under
-	equilibrium assumptions, while Sybil-defense
-	mechanisms~\cite{li2017sybilcontrol} typically focus on
-	identity admission or detection. In contrast, the present work
-	isolates structural conditions under which adversarial identity
-	cost becomes amortizable or remains proportional to the number
-	of sustained identities---a dimension that neither aggregate
-	cost models nor admission-based defenses address.
-	Thus, unlike prior work that focuses on identity creation,
-	consensus thresholds, or economic equilibria,
-	our analysis identifies identity-level Sybil resistance
-	as a consequence of the structural properties of the
-	underlying resource class.
-	Specifically, prior work does not isolate whether a fixed
+	Unlike prior work on consensus thresholds, cost-of-corruption,
+	or identity admission, this paper asks whether a fixed
 	aggregate resource can be decomposed across many identities
-	at sublinear marginal cost---the central question of this paper.
+	at sublinear marginal cost.
+	We formalize divisibility, temporal reusability,
+	identity transferability, and throughput boundedness as
+	the properties that primarily govern this question, and
+	establish an asymptotic boundary between resource classes.
+	The framework is intended to complement, not replace,
+	existing protocol-level and economic analyses.
 	% ============================================================
 	\section{System Model}
 	
@@ -845,6 +838,18 @@
 		configuration and is tightest when $r_{\min} = \tau$.
 	\end{definition}
 	
+	\begin{remark}[Saturated channels: $r_{\min}=\tau$]
+		The boundary case $r_{\min}=\tau$ corresponds to fully
+		saturated participation channels: each active identity
+		consumes the entire per-window throughput allocation
+		of its dedicated channel.
+		In this setting no capacity slack exists and any
+		additional identity strictly requires a new independent
+		channel.
+		The lower bound $C(s,T)\ge s T r_{\min}$ becomes tight,
+		and the linear scaling regime holds with constant~1.
+	\end{remark}
+	
 	Throughput boundedness imposes a per-identity rate constraint
 	that is structurally non-transferable and window-local.
 	Scaling the number of identities therefore requires
@@ -862,48 +867,18 @@
 	\end{proposition}
 	
 	\begin{proof}
-		Let $R$ be a resource satisfying all four properties,
-		and let $A$ be an adversary controlling an aggregate
-		allocation $r = \sum_{v \in S_t} r_v(t)$ across
-		a set $S_t$ of identities at time $t$.
-		
-		\textbf{Step 1: Partitioning does not change aggregate influence.}
-		By divisibility (Definition~2), the adversary may partition
-		$r$ into any collection $r_1, \dots, r_s \geq 0$ satisfying
-		$\sum_{v=1}^{s} r_v = r$.
-		By additivity of influence (Definition~3),
-		\[
-		\sum_{v \in S_t} f(r_v(t))
-		\;=\;
-		f\!\left(\sum_{v \in S_t} r_v(t)\right)
-		\;=\; f(r).
-		\]
-		Hence total influence $W_A(t) = f(r)$ is invariant
-		to how $r$ is partitioned across identities.
-		
-		\textbf{Step 2: Reassignment across identities
-			preserves aggregate influence.}
-		By identity transferability (Definition~5),
-		the allocation $r_v(t)$ assigned to any identity $v$
-		may be reassigned to any other identity $v'$
-		without proportional cost.
-		Combined with Step~1, any redistribution of $r$
-		across identities leaves $W_A(t)$ unchanged.
-		
-		\textbf{Step 3: Persistence across time windows.}
-		By temporal reusability (Definition~4),
-		the aggregate allocation $r$ obtained in window $t$
-		may be reused in all subsequent windows
-		$t+1, \dots, T$ without renewed expenditure.
-		Therefore $W_A(t) = f(r)$ holds uniformly across
-		all windows, independent of identity configuration.
-		
-		\textbf{Conclusion.}
-		Since $W_A(t) = f(r)$ depends only on the aggregate
-		allocation $r$ and not on how $r$ is distributed
-		across identities or time, adversarial influence
-		is fully determined by aggregate resource ownership.
-		Identity partitioning is therefore structurally irrelevant.
+		Let $R$ satisfy all four properties and let $A$ control
+		aggregate allocation $r = \sum_{v \in S_t} r_v(t)$.
+		By divisibility, $r$ may be partitioned across any set of
+		identities; by additivity,
+		$\sum_{v} f(r_v) = f(\sum_v r_v) = f(r)$,
+		so total influence $W_A(t)=f(r)$ is invariant to partitioning.
+		By identity transferability, any reallocation of $r$ across
+		identities leaves $W_A(t)$ unchanged.
+		By temporal reusability, $r$ acquired in window $t$ persists
+		across all subsequent windows without renewed expenditure.
+		Hence $W_A(t)=f(r)$ depends only on aggregate ownership,
+		independent of identity configuration.
 	\end{proof}
 	
 	\subsection{Resource Classes}
@@ -981,35 +956,13 @@
 		component of PoW.
 	\end{table*}
 	
-	Parallelizable resources (e.g., staked capital and
-	computational capacity) support subdivision, transfer,
-	and reuse of their stock component, enabling adversarial
-	effort to be amortized across identities and time.
-	
-	Proof-of-Work is a \emph{hybrid} that must be decomposed
-	for structural analysis.
-	Its \emph{capacity component} (mining hardware) is a reusable
-	stock resource: once acquired, it can be partitioned across
-	identities without renewed expenditure, placing it in the
-	parallelizable class of Theorem~1.
-	Its \emph{operational component} (energy) is non-reusable
-	across windows: it must be renewed each window, contributing
-	a flow cost not captured by the parallelizable classification.
-	Theorem~1 addresses the identity-partitioning behavior of the
-	capacity component; the complete economic cost of mining
-	combines both components and should be analyzed accordingly.
-	
-	This decomposition resolves the apparent tension between
-	Theorem~1 and the empirically observed flow costs of PoW:
-	the theorem does not claim that PoW mining is free across
-	time, but that the \emph{capacity} component can be
-	partitioned across identities without additional structural cost.
-	
-	In contrast, throughput-bounded resources rely on
-	independent execution channels whose capacity cannot
-	be aggregated. Sustaining additional identities therefore
-	requires provisioning additional channels, leading to
-	linear cost scaling.
+	Parallelizable resources admit subdivision and reuse of
+	their stock component across identities and time.
+	PoW is hybrid: its capacity component (hardware) is reusable
+	stock (Theorem~1 applies); its operational component (energy)
+	is window-local flow and must be renewed each window.
+	Throughput-bounded resources require one independent channel
+	per identity, yielding linear cost scaling.
 	
 	\subsection{Coordination Cost Assumption}
 	\begin{assumption}[Amortized Coordination]
@@ -1047,18 +1000,26 @@
 		and cloud-managed multi-account orchestration.
 		
 		\noindent\textit{Role in the analysis.}
-		The structural results of Theorems~1 and~2 isolate
-		resource-induced scaling independently of $h(s,T)$.
-		Theorem~1 shows that even when $h(s,T) = 0$, a
-		divisible, reusable resource may be insufficient to enforce linear identity cost within the present abstraction.
-		Theorem~2 shows that a throughput-bounded resource enforces
-		$C(s,T) = \Omega(sT)$ regardless of how small $h(s,T)$ is.
-		The assumption therefore does not embed the conclusion:
-		it captures the observation that coordination overhead
-		alone cannot restore linearity for parallelizable resources,
-		nor can it eliminate the structural lower bound
-		for throughput-bounded resources.
+		Theorems~1 and~2 isolate resource-induced scaling
+		independently of $h(s,T)$: Theorem~1 holds even when
+		$h(s,T)=0$, and Theorem~2 holds regardless of how
+		small $h(s,T)$ is.
 	\end{assumption}
+	
+	\begin{remark}[Boundary case: $h(s,T)=\Theta(sT)$]
+		If coordination overhead itself scales linearly with
+		total sustained participation, i.e., $h(s,T)=\Theta(sT)$,
+		then coordination becomes the dominant cost term and
+		the total adversarial cost satisfies $C(s,T)=\Theta(sT)$
+		even for a divisible, reusable resource.
+		In this regime, orchestration overhead effectively
+		reintroduces throughput-bounding structure at the
+		coordination layer.
+		The framework therefore applies to settings in which
+		coordination infrastructure allows sublinear overhead;
+		when it does not, the system exhibits linear scaling
+		by a different mechanism.
+	\end{remark}
 	
 	
 	\subsection{Identity-Amortization Property}
@@ -1093,10 +1054,8 @@
 	
 	\section{Structural Limits of Parallelizable Resources}
 	
-	We establish that mechanisms grounded in divisible, reusable
-	resources admit identity amortization within the considered model.
-	The result is scoped to the present abstraction: it characterizes
-	scaling behavior under the coordination model of
+	We establish that divisible, reusable resources admit identity
+	amortization under the coordination model of
 	Assumption~\ref{ass:coordination}.
 	
 	\subsection{Marginal Identity Cost}
@@ -1269,29 +1228,13 @@
 	\end{proof}
 	
 	\begin{remark}
-		Theorem~1 does not assert that a fixed aggregate
-		resource can activate arbitrarily many identities:
-		the activation threshold requires $r \ge s\,r_{\min}$,
-		so aggregate resource must grow with~$s$.
-		The theorem asserts instead that a parallelizable
-		resource imposes no additional per-window renewal
-		cost per identity---once $r = s\,r_{\min}$ is
-		acquired, temporal reusability eliminates the
-		$T$-scaling overhead that throughput-bounded resources
-		enforce.
-		Moreover, protocol rules that merely redistribute
-		or account for a fully parallelizable resource
-		cannot by themselves create linear sustained identity
-		cost; achieving $C(s,T)=\Omega(sT)$ requires
-		introducing a structural constraint that breaks
-		parallelizability.
+		Theorem~1 concerns the absence of $T$-scaling renewal cost:
+		aggregate resource must still grow with $s$ (each identity
+		requires at least $r_{\min}$), but temporal reusability
+		eliminates per-window overhead once the stock is acquired.
+		Introducing $C(s,T)=\Omega(sT)$ under this model requires
+		a non-parallelizable structural component.
 	\end{remark}
-	
-	Thus, parallelizable resources enable identity
-	amplification by allowing adversaries to acquire
-	aggregate capacity once and redistribute it across
-	arbitrarily many identities without per-window
-	renewal overhead.
 	
 	\section{Linear Lower Bound for Throughput-Bounded Resources}
 	
@@ -1428,81 +1371,37 @@
 	\end{theorem}
 	
 	\begin{proof}
-		
-		Fix $s$ and $T$.
-		Suppose the adversary sustains $s$ active identities
-		in each window $t=1,\dots,T$.
-		We show that no adversarial strategy can reduce
-		total expenditure below $sT r_{\min}$,
-		regardless of how identities are coordinated.
-		
-		\textbf{Step 1: Per-identity expenditure is unavoidable.}
-		By the activation threshold (Definition~1),
-		each identity $v$ must receive at least $r_{\min}>0$
-		units of resource in every window $t$ in which it is active.
-		No protocol-level rule can substitute for this requirement,
-		since activation is defined in terms of resource allocation,
-		not identity labeling.
-		
-		\textbf{Step 2: Resource cannot be shared across identities.}
-		Since $R$ is non-transferable (Definition~\ref{def:throughput},
-		condition~2), the allocation $r_v(t)$
-		assigned to identity $v$ in window $t$ cannot be
-		simultaneously credited to any other identity $v' \neq v$.
-		Therefore the per-window expenditure satisfies
-		
+		Fix $s$ and $T$; suppose the adversary sustains $s$ active
+		identities across windows $t=1,\dots,T$.
+		By the activation threshold (Definition~1), each identity $v$
+		requires $r_v(t) \ge r_{\min}$ in every active window.
+		Non-transferability (Definition~\ref{def:throughput}, condition~2)
+		prevents $r_v(t)$ from being credited to any other identity,
+		so $\sum_{v=1}^{s} r_v(t) \ge s\,r_{\min}$ for each $t$.
+		Window-locality (condition~3) prevents carry-over, forcing
+		fresh expenditure each window.
+		Summing over $T$ windows:
 		\[
-		\sum_{v=1}^{s} r_v(t) \ge s r_{\min}
-		\qquad \text{for each } t = 1,\dots,T.
+		C(s,T) \;\ge\; \sum_{t=1}^{T} s\,r_{\min} \;=\; sT\,r_{\min}.
 		\]
-		
-		\textbf{Step 3: Resource cannot be carried across windows.}
-		Since allocation is window-local (Definition~\ref{def:throughput},
-		condition~3), the resource allocated
-		in window $t$ does not persist into window $t+1$.
-		The adversary must therefore renew the full per-identity
-		expenditure independently in every window.
-		Summing over all $T$ windows,
-		
-		\[
-		C(s,T)
-		\;\ge\;
-		\sum_{t=1}^{T} s\, r_{\min}
-		\;=\;
-		sT\, r_{\min}.
-		\]
-		
-		Setting $c = r_{\min}$ completes the proof.
+		Setting $c = r_{\min}$ gives $C(s,T)=\Omega(sT)$.
 		The marginal lower bound
 		$\liminf_{s\to\infty}\Delta(s,T) \ge cT$
-		follows directly from Lemma~4.
-		
+		follows from Lemma~4.
 	\end{proof}
-	
-	This establishes that throughput-bounded resources inherently
-	limit adversarial scalability by eliminating the possibility
-	of identity-level amortization.
-	Each additional identity requires an independent execution channel, yielding linear cost growth under the constraints of Definition~\ref{def:throughput}.
 	
 	% ============================================================
 	
 	\section{Extremal Structural Separation}
 	
-	We now combine the previous results to establish
-	the extremal structural boundary in adversarial identity scaling.
+	We now establish the extremal scaling separation.
+	The result suggests that adversarial scaling behavior is
+	primarily governed by the structural properties of the
+	underlying resource.
 	
-	Beyond a purely asymptotic distinction, this separation
-	characterizes an asymptotic boundary between resource classes
-	that enable identity amplification attacks and those that
-	resist them under the considered model.
+	\subsection{Adversarial Scaling Regimes}
 	
-	The result shows that adversarial scaling behavior is determined entirely
-	by the structural properties of the underlying
-	security-weighting resource.
-	
-	\subsection{Adversarial Scaling Geometry}
-	
-	\begin{definition}[Scaling Geometry]
+	\begin{definition}[Scaling Regime]
 		
 		A mechanism induces
 		
@@ -1513,7 +1412,7 @@
 		
 	\end{definition}
 	
-	The scaling geometry characterizes how the
+	The scaling regime characterizes how the
 	adversarial cost of sustaining identities grows
 	with the number of identities $s$
 	and the time horizon $T$.
@@ -1540,7 +1439,7 @@
 		Consequently,
 		parallelizable resources and throughput-bounded
 		non-parallelizable resources induce
-		disjoint adversarial scaling geometries.
+		asymptotically disjoint scaling regimes.
 		
 	\end{theorem}
 	
@@ -1569,12 +1468,12 @@
 		no mechanism can simultaneously exhibit both.
 		
 		Therefore the two structural resource classes
-		induce disjoint adversarial scaling geometries.
+		induce disjoint asymptotic scaling regimes.
 		
 	\end{proof}
 	
 	Thus, parallelizable resources enable identity amplification,
-	whereas throughput-bounded resources fundamentally restrict it.
+	whereas throughput-bounded resources resist, within the considered model, it.
 	
 	\begin{corollary}
 		Within the structural model of this paper,
@@ -1704,7 +1603,7 @@
 	structural properties are partially relaxed and to
 	what degree.
 	
-	Characterizing these intermediate scaling geometries
+	Characterizing these intermediate scaling regimes
 	in full generality remains an open theoretical problem.
 	A natural extension would reformulate the axiomatic
 	framework using continuous structural parameters
@@ -1725,22 +1624,13 @@
 	
 	\section{Instantiations of Throughput-Bounded Resources}
 	
-	The throughput-bounded, non-transferable resource class
-	introduced in Sections~VI--VII is not merely a theoretical abstraction.
-	These resources arise naturally in real-world systems and play
-	a central role in preventing identity amplification attacks.
-	
-	In contrast to parallelizable resources, which enable adversaries
-	to scale identities at sublinear cost, throughput-bounded resources
-	impose intrinsic per-identity constraints that eliminate amortization.
-	Each additional identity must be supported by an independent
-	execution channel, thereby enforcing linear adversarial cost.
-	
-	This section characterizes concrete mechanisms that instantiate
-	such constraints and illustrates how they fundamentally limit
-	adversarial identity scaling. Figure~\ref{fig:resource-geometry}
-	provides a conceptual overview of the relationship between
-	resource structure and adversarial scaling geometry.
+	This section characterizes mechanisms that instantiate
+	the throughput-bounded resource class of Sections~VI--VII
+	and illustrates how the resulting structural constraints
+	influence adversarial identity scaling.
+	Figure~\ref{fig:resource-geometry} provides a conceptual
+	overview of the relationship between resource structure and
+	scaling behavior.
 	
 	\begin{figure*}[t]
 		\centering
@@ -1804,7 +1694,7 @@
 			
 		\end{tikzpicture}
 		
-		\caption{Structural geometry of adversarial identity cost.
+		\caption{Structural classification of adversarial identity cost.
 			Parallelizable resources (left) enable identity amortization
 			and sublinear cost. Throughput-bounded resources (center)
 			enforce independent per-identity channels and linear cost.
@@ -1872,60 +1762,30 @@
 	\end{proof}
 	
 	\subsection{Examples of Throughput-Bounded Channels}
-	Several real-world mechanisms naturally instantiate
-	per-actor throughput channels.
+	Several mechanisms naturally instantiate per-actor throughput
+	channels.
 	
 	\paragraph{Human Real-Time Participation}
-	Human participation constitutes one concrete realization
-	of a throughput-bounded channel. Human cognitive processing,
-	attention span, and motor interaction impose intrinsic limits
-	on sustained activity. These physiological constraints bound
-	the amount of verifiable activity a single actor can produce
-	per time window. Increasing computational infrastructure
-	does not increase the throughput of a human-bound channel.
-	Thus adversarial scaling requires recruiting additional
-	independent actors, making identity amplification
-	economically linear in $s$.
+	Human cognition and motor interaction impose intrinsic per-window
+	throughput limits that cannot be increased by adding computational
+	infrastructure. Adversarial scaling therefore requires recruiting
+	additional independent actors.
 	
 	\paragraph{Device-Bound Execution}
-	Hardware-bound environments can also induce throughput limits.
-	Trusted execution environments, secure hardware tokens, and
-	device attestation systems bind activity to physical
-	hardware~\cite{costan2016intel}. Each device can produce
-	only limited verifiable output within a time window.
-	An adversary cannot reuse a single device to sustain multiple
-	identities within the same window, preventing cross-identity
-	amortization.
+	Trusted execution environments and device attestation systems bind
+	activity to specific hardware~\cite{costan2016intel}.
+	Each device produces limited verifiable output per window;
+	a single device cannot sustain multiple identities simultaneously.
 	
 	\paragraph{Rate-Limited Network Participation}
-	Not all rate-limiting mechanisms instantiate throughput-bounded
-	resources in the sense of this paper. Ordinary account-level
-	rate limits do not qualify unless they are structurally bound
-	to non-transferable actors, devices, or execution channels.
-	If identities can be created cheaply and limits are attached
-	only to syntactic account identifiers, adversaries may bypass
-	such constraints through identity replication.
-	
-	Throughput-boundedness therefore requires that rate constraints
-	be tied to independent participation channels that cannot be
-	aggregated or reassigned. Concrete examples include
-	device-attested proposal submission, where each proposal must
-	originate from a distinct attested hardware token, and
-	hardware-rooted governance participation, where voting
-	actions are bound to non-transferable execution environments.
-	When such structural binding exists, per-identity execution
-	constraints enforce adversarial cost that scales linearly
-	with the number of identities.
-	
-	\subsection{Automation and AI}
-	Automation does not invalidate the linear lower bound
-	unless it eliminates the underlying throughput constraint.
-	If participation requires independent channels whose
-	throughput cannot be aggregated or transferred, scaling
-	the number of identities still requires provisioning
-	additional independent channels. The lower bound therefore
-	depends on the persistence of actor-bound throughput
-	constraints, not on assumptions about human uniqueness.
+	Account-level rate limits qualify as throughput-bounded only when
+	structurally bound to non-transferable execution channels.
+	Limits attached to syntactic identifiers alone are bypassable
+	through identity replication.
+	Effective enforcement requires binding rate constraints to
+	independent, non-aggregable participation channels such as
+	device-attested proposal submission or hardware-rooted
+	governance actions.
 	
 	\subsection{Hybrid Resource Models}
 	
@@ -1962,82 +1822,32 @@
 	\end{lemma}
 	
 	\begin{proof}
-		
-		We consider the adversary's cost minimization problem
-		under the hybrid resource $R = (R_p, R_t)$.
-		
-		\textbf{Step 1: Additive decomposition assumption.}
-		We consider hybrid systems in which the total adversarial
-		cost decomposes additively as
-		\[
-		C(s,T) = C_p(s,T) + C_t(s,T),
-		\]
-		representing independent resource constraints that contribute
-		separably to adversarial expenditure.
-		
-		\textbf{Step 2: Bounding each component.}
-		By Theorem~1, $C_p(s,T) = o(sT)$ since $R_p$ is
-		parallelizable and admits identity amortization.
-		By Theorem~2, $C_t(s,T) \geq c \cdot sT$ for some
-		constant $c > 0$, since $R_t$ is throughput-bounded,
-		non-transferable, and window-local.
-		
-		\textbf{Step 3: The throughput-bounded component dominates.}
-		Since $C_t(s,T) = \Omega(sT)$ and $C_p(s,T) = o(sT)$,
-		for sufficiently large $s$ the throughput-bounded term
-		dominates:
-		\[
-		C(s,T) = C_p(s,T) + C_t(s,T) \geq C_t(s,T) \geq c \cdot sT.
-		\]
-		
-		Therefore $C(s,T) = \Omega(sT)$.
-		
+		Under additive decomposition,
+		$C(s,T)=C_p(s,T)+C_t(s,T)$.
+		By Theorem~1, $C_p(s,T)=o(sT)$.
+		By Theorem~2, $C_t(s,T)\ge c\cdot sT$ for some $c>0$.
+		For sufficiently large $s$, the throughput-bounded term
+		dominates: $C(s,T)\ge C_t(s,T)\ge c\cdot sT$,
+		giving $C(s,T)=\Omega(sT)$.
 	\end{proof}
 	
-	This result applies to additive decompositions of hybrid resources
-	and should be interpreted as a sufficient structural characterization,
-	rather than a complete description of all hybrid compositions.
-	Non-additive hybrid compositions, in which the two resource
-	components interact or partially substitute for one another,
-	are outside the scope of this paper and remain an open
-	direction for future work.
-	
-	Thus, throughput-bounded components act as a bottleneck
-	that neutralizes identity amplification attacks enabled by
-	parallelizable resources.
+	The additive decomposition is a structural modeling assumption:
+	the two components are assumed to contribute independently.
+	Non-additive compositions remain outside the present scope.
 	
 	\subsection{Analytical Illustration of the Scaling Laws}
 	
-	To illustrate the asymptotic bounds proved in
-	Theorems~1--3 we consider closed-form expressions
-	derived directly from the theoretical analysis.
-	These curves are illustrative rather than empirical;
-	they visualize the theoretical scaling behavior
-	established in Theorems~1 and~2.
-	
-	For parallelizable resources the adversary incurs a fixed
-	aggregate allocation cost
-	\[
-	C_p(s,T) = r_{\text{fixed}},
-	\]
-	while throughput-bounded resources require per-identity
-	resource expenditure
-	\[
-	C_t(s,T) = r_{\min} \cdot s \cdot T .
-	\]
-	Figure~\ref{fig:theorem-validation} plots these expressions
-	for $s \in [1,10{,}000]$ with $T=100$ windows.
-	The parallelizable cost curve is flat, reflecting identity
-	amortization and vanishing marginal identity cost.
-	In contrast, the throughput-bounded curve grows linearly,
-	confirming the asymptotic lower bound
-	$C(s,T)=\Omega(sT)$.
+	Figure~\ref{fig:theorem-validation} plots the closed-form
+	cost expressions for $s\in[1,10{,}000]$ and $T=100$.
+	The parallelizable curve is flat (identity amortization);
+	the throughput-bounded curve grows linearly with $s$,
+	consistent with $C(s,T)=\Omega(sT)$.
 	
 	\begin{figure*}[t]
 		\centering
 		\includegraphics[width=0.95\textwidth]{fig2_theorem_validation.pdf}
 		
-		\caption{Adversarial cost geometry derived from Theorems~1--3.
+		\caption{Adversarial cost scaling derived from Theorems~1--2.
 			\emph{Left}: total adversarial cost $C(s,T)$
 			vs.\ sustained identities~$s$;
 			parallelizable resources exhibit cost growing only
@@ -2061,6 +1871,72 @@
 		\label{fig:theorem-validation}
 	\end{figure*}
 	
+	\subsection{Illustrative Systems Anchoring}
+	\label{sec:anchoring}
+	
+	The structural distinctions formalized in this paper
+	correspond to observable participation patterns in deployed systems.
+	The following illustrate the connection at order-of-magnitude level
+	and are not empirical measurements or model validations.
+	
+	\paragraph{Mining pool concentration (PoW).}
+	Empirical studies of Bitcoin and Ethereum (pre-Merge)
+	consistently document that a small number of mining pools
+	account for the majority of block production.
+	Gencer et al.~\cite{gencer2018decentralization} report
+	that the top-4 pools frequently control over $50\%$ of
+	hash power, and similar patterns appear across
+	other PoW networks.
+	This concentration is structurally consistent with the
+	divisibility and transferability of mining capacity:
+	operators aggregate hardware across nominally distinct
+	identities without proportional renewal cost per identity.
+	This is precisely the identity-amortization behavior
+	formalized in Theorem~1 for divisible resources.
+	
+	\paragraph{Validator delegation in PoS.}
+	In Ethereum's proof-of-stake protocol, the majority of
+	staked ETH is concentrated among a small number of
+	liquid staking providers
+	(e.g., Lido, Coinbase, Rocket Pool).
+	As of 2023, Lido Finance alone controlled approximately
+	$30\%$ of staked ETH~\cite{lido2023concentration},
+	with a handful of providers jointly exceeding $50\%$.
+	Delegation allows a fixed capital base to be distributed
+	across many validators, again instantiating the
+	amortization pattern of Theorem~1 for transferable,
+	reusable resources.
+	
+	\paragraph{Governance proposal rates.}
+	In on-chain governance systems (e.g., Compound, Uniswap,
+	MakerDAO), proposal submission typically requires
+	meeting a threshold of delegated voting power.
+	An actor who splits their stake across $s$ accounts and
+	submits proposals from each can linearly multiply proposal
+	bandwidth without proportional capital increase --- provided
+	no non-transferable per-identity throughput constraint
+	is enforced.
+	This illustrates the vulnerability described in the
+	stake-governed participation case study (Section~IX-C).
+	
+	\paragraph{Device-attested participation.}
+	Hardware security keys and trusted execution environments
+	(e.g., Intel SGX-based attestation) enforce per-device
+	participation limits.
+	A single device cannot simultaneously generate valid
+	attestations for multiple concurrent identities.
+	In systems where governance actions require valid
+	hardware attestation per submission, this imposes a
+	structural per-identity throughput limit consistent
+	with Definition~6, approximating the throughput-bounded
+	regime of Theorem~2.
+	
+	These patterns are cited at the order-of-magnitude level
+	to illustrate that the structural conditions modeled in
+	this paper correspond to observable participation behavior.
+	No quantitative claim about the applicability of the
+	theoretical bounds to specific deployed systems is made.
+	
 	\subsection{Practical Enforcement of Throughput Bounds}
 	
 	The theoretical results developed in this paper assume the
@@ -2072,359 +1948,238 @@
 	Examples include rate-limited protocol participation,
 	device-attested computation, and human-interaction tasks.
 	While no practical mechanism perfectly enforces strict
-	non-transferability, systems that approximate these structural
-	properties inherit the linear adversarial cost guarantees
-	established in this work and effectively prevent identity
-	amplification.
+	non-transferability, systems approximating these structural properties
+	may approach the linear scaling conditions of Theorem~2.
 	
 	% ============================================================
 	\section{Adversarial Implications and Attack Surfaces}
 	
-	The asymptotic separation of Sections~V--VII has direct
-	adversarial implications.
-	When a resource is divisible and reusable, adversarial influence
-	may be redistributed across identities while preserving aggregate
-	capacity, enabling attacks that remain invisible under
-	aggregate-weight security models.
-	The key shift is from \emph{how much resource an adversary controls}
-	to \emph{how adversarial cost scales as identities proliferate}.
+	The structural separation of Sections~V--VII has direct
+	implications for adversarial participation.
+	When a resource is divisible and reusable, capacity may be
+	redistributed across identities without proportional cost growth,
+	shifting the key security question from aggregate ownership
+	to identity-level participation scaling.
 	
-	\subsection{Canonical Amortization Attack}
+	\subsection{Canonical Amortization Strategy}
 	
-	Let $R$ be a divisible, reusable resource.
-	An adversary: (i)~acquires aggregate allocation $r = s\,r_{\min}$;
-	(ii)~partitions $r$ across $s$ identities (divisibility);
-	(iii)~reassigns allocations via transferability; and
-	(iv)~reuses allocations across windows (temporal reusability).
-	By Lemmas~1--3, total cost satisfies
+	Let $R$ be a parallelizable resource.
+	An adversary acquires aggregate allocation
+	$r = s\,r_{\min}$, partitions it across $s$ identities,
+	and reuses the allocation across windows.
+	By Theorem~1,
 	\[
-	C(s,T) \le s\,r_{\min} + h(s,T) = o(sT),
+	C(s,T)=o(sT),
 	\]
-	so marginal cost $\Delta(s,T) = O(1) = o(T)$.
-	The adversary expands the identity set without per-window renewal
-	overhead---in contrast to rate-limited resources, where
-	$\Delta(s,T) = \Omega(T)$.
+	so the marginal cost of sustaining additional identities does
+	not grow proportionally with the time horizon.
+	In contrast, throughput-bounded resources enforce
+	$\Delta(s,T)=\Omega(T)$ by Theorem~2.
 	
 	\subsection{Instantiation in Blockchain Systems}
 	
 	\paragraph{Proof-of-Work.}
-	PoW is a hybrid.
-	Mining \emph{capacity} (hardware) is divisible and transferable;
-	mining pools implement identity partitioning by distributing hash
-	power while maintaining aggregate control.
-	Theorem~1 applies to this capacity component.
-	\emph{Operational expenditure} (energy) is non-reusable and
-	window-local, contributing a flow cost not captured by the
-	divisible classification.
-	The full economic cost of sustaining multiple mining identities
-	combines both components.
+	Proof-of-Work combines a reusable stock component
+	(mining hardware) with a non-reusable flow component
+	(energy expenditure).
+	Mining capacity is divisible and transferable, allowing
+	aggregate hash power to be redistributed across identities
+	through mechanisms such as mining pools.
+	Operational energy expenditure, however, remains
+	window-local and must be renewed continuously.
 	
 	\paragraph{Proof-of-Stake.}
-	Financial stake satisfies all four divisibility properties.
-	Delegation markets enable a fixed capital base to be distributed
-	across arbitrarily many validators.
-	Under the considered model, stake therefore admits identity
-	amortization: $C(s,T) = o(sT)$ with respect to the stake
-	component.
+	Financial stake satisfies divisibility, transferability,
+	and temporal reuse.
+	Delegation mechanisms therefore allow aggregate capital
+	to be redistributed across multiple validators without
+	proportional identity-level renewal cost.
+	Under the present model, the stake component admits
+	identity amortization.
 	
-	\subsection{Case Study: Stake-Governed Protocol}
+	\subsection{Illustrative Governance Example}
+	\label{sec:governance_example}
 	
-	Consider a governance protocol where voting influence is
-	proportional to delegated stake, proposal submission is
-	rate-limited to one per identity per epoch, and committee
-	membership is determined by per-identity sortition.
+	\noindent\textit{(The following is an illustrative example,
+		not a formal proposition.)}
 	
-	\textbf{Attack.}
-	An adversary controlling $1\%$ of total stake $S$ splits
-	across $s = 100$ accounts, each holding $0.01S/100$.
-	Total voting weight remains $0.01S$; proposal bandwidth
-	expands to $100$ proposals per epoch.
-	Since stake redistribution incurs no additional $T$-scaling
-	expenditure, this amplification is essentially free under the
-	considered model.
+	\medskip
+	Consider a governance protocol in which voting influence
+	is proportional to delegated stake, while proposal submission
+	is rate-limited per identity.
 	
-	\textbf{Structural analysis.}
-	The stake component admits amortization by Theorem~1.
-	If the rate limit is bound to non-transferable execution
-	channels (e.g., device attestation), then by Theorem~2
-	the participation component enforces $C_t(s,T) = \Omega(sT)$,
-	and by Lemma~5 total cost satisfies $C(s,T) = \Omega(sT)$.
-	If the rate limit is enforced only at the account level,
-	without structural binding, the constraint is bypassable and
-	the system reduces to the divisible regime of Theorem~1.
+	An adversary controlling a fixed stake allocation may split
+	that allocation across many accounts while preserving total
+	voting weight.
+	Although aggregate stake remains unchanged, the adversary
+	may increase proposal bandwidth, expand committee presence,
+	or amplify visibility in deliberative processes.
 	
-	\textbf{Design implication.}
-	Identity-level security in hybrid protocols depends not on
-	rate limits alone, but on whether those limits are structurally
-	bound to non-transferable participation channels.
+	If participation limits are enforced only at the account level,
+	the system remains vulnerable to identity amortization.
+	By contrast, if participation is bound to non-transferable
+	execution channels (e.g., device-attested participation),
+	the throughput-bounded component enforces
+	\[
+	C(s,T)=\Omega(sT)
+	\]
+	by Theorem~2 and Lemma~5.
+	
+	This distinction highlights that identity-level security depends
+	not only on protocol rules, but on whether participation
+	constraints are structurally bound to independent channels.
 	
 	\subsection{Governance Attack Surface}
 	
-	In identity-sensitive governance, an adversary controlling
-	total stake $R$ may distribute it across $s$ identities without
-	changing total voting weight, yet gain:
-	increased proposal capacity, biased committee selection,
-	amplified visibility in deliberation, and influence over
-	rate-limited participation.
-	These effects arise without increasing aggregate resource
-	ownership and are not captured by classical aggregate-weight
-	analyses.
+	Identity-sensitive governance mechanisms may expose attack
+	surfaces not captured by aggregate-weight security analyses.
+	An adversary distributing a fixed aggregate resource across
+	many identities can potentially obtain disproportionate
+	influence over proposal admission, committee sampling,
+	visibility amplification, or other participation mechanisms
+	that operate at the identity layer rather than the aggregate
+	resource layer.
 	
-	\subsection{Mitigation and Design Principle}
+	These effects arise even when total resource ownership
+	remains unchanged.
 	
-	Under the considered model, introducing per-identity
-	throughput constraints bound to non-transferable channels
-	may restore $C(s,T) = \Omega(sT)$.
-	This suggests treating identity-level security as a co-design
-	problem between protocol rules and resource structure.
-	Systems that rely exclusively on divisible, reusable resources
-	may admit amortization properties under the considered model; incorporating at least one rate-limited, non-transferable component appears necessary to resist identity amplification within this framework.
+	\subsection{Mitigation Principle}
 	
-	Examples of such components include:
-	actor-bound participation constraints,
-	device-attested execution,
-	non-transferable throughput tokens,
-	or interaction channels requiring independent execution.
+	Within the present framework, preventing identity
+	amortization requires introducing at least one participation
+	constraint that is throughput-bounded and non-transferable.
+	Examples include device-attested execution,
+	actor-bound participation channels,
+	or interaction mechanisms requiring independent execution
+	capacity.
+	
+	More generally, the results suggest that identity-level
+	security should be treated as a joint property of protocol
+	rules and the structural characteristics of the underlying
+	security resource.
+	
 	\section{Limitations and Open Problems}
 	
-	While the structural separation established in this work
-	identifies asymptotic constraints on adversarial identity scaling within the present model,
-	several limitations and open questions remain.
+	The structural separation established in this work
+	characterizes adversarial identity scaling within the
+	present abstraction.
+	Several limitations and open questions remain.
 	
-	\subsection{Measurement of Throughput Constraints}
+	\subsection{Enforcement of Throughput Constraints}
 	
-	Our analysis assumes the existence of a per-identity throughput bound
-	$\tau$ and an activation threshold $r_{\min}$.
-	In practice, accurately measuring and enforcing such constraints
-	may be challenging.
+	The framework assumes the existence of a per-identity
+	throughput bound $\tau$ and activation threshold
+	$r_{\min}$.
+	In practice, enforcing such constraints may be difficult,
+	particularly in environments where participation can be
+	replicated through automation, infrastructure scaling,
+	or outsourced execution.
 	
-	Real-world systems must ensure that throughput limits cannot be
-	bypassed through aggregation, outsourcing, or hardware replication.
-	If the effective per-identity throughput increases with additional
-	infrastructure or automation, the linear lower bound may weaken.
+	Verification mechanisms such as device attestation,
+	interaction validation, or behavioral verification may
+	introduce additional latency, coordination complexity,
+	or deployment cost.
+	These costs are intentionally excluded from the model
+	and should be incorporated in deployment-specific analyses.
 	
-	Designing robust mechanisms that enforce non-transferable,
-	rate-limited participation therefore remains an important
-	engineering challenge.
+	\subsection{Hybrid and Evolving Resource Classes}
 	
-	\subsection{Verification and Measurement Overhead}
+	Many deployed systems combine multiple resource classes,
+	including capital, computational effort, and human or
+	device-bound participation.
+	While the framework cleanly separates idealized resource
+	types, hybrid constructions may exhibit intermediate
+	scaling behavior.
 	
-	Even when throughput-bounded resources exist,
-	systems must verify that resource usage actually corresponds
-	to independent identities or actors.
+	Lemma~5 establishes partial results for additive hybrid
+	compositions in which throughput-bounded components
+	dominate asymptotically.
+	More general hybrid interactions and non-additive
+	resource compositions remain open theoretical questions.
 	
-	Verification mechanisms---such as device attestation,
-	interaction verification, or behavioral validation---
-	may introduce additional complexity,
-	latency, or economic cost.
-	The present model excludes verification cost from $C(s,T)$;
-	in practice, such costs may be non-negligible and should be
-	incorporated into any concrete deployment analysis.
+	The structural properties of resources may also evolve
+	over time.
+	Advances in automation, AI-assisted participation,
+	or hardware acceleration may reduce effective
+	non-transferability or increase achievable throughput,
+	potentially narrowing the practical distinction between
+	the two scaling regimes.
 	
-	Understanding the trade-offs between strong throughput
-	verification and system scalability
-	remains an open systems-design problem.
+	\subsection{Economic Coordination and Identity Markets}
 	
-	\subsection{Coordinated Multi-Actor Adversaries}
+	The present model treats adversarial participation as a
+	resource-allocation problem and abstracts away broader
+	economic coordination dynamics.
+	In practice, delegated participation markets,
+	identity outsourcing, and secondary markets for
+	rate-limited credentials may alter the effective cost
+	structure in ways not captured by the abstraction.
 	
-	The lower bound shows that sustaining $s$ identities requires
-	$\Omega(sT)$ resource expenditure when each identity must be
-	supported by an independent throughput channel.
+	Similarly, governance incentives, token economics,
+	and adaptive protocol policies may influence sustained
+	identity cost over time.
+	Analyzing equilibrium behavior under such adaptive
+	economic conditions remains outside the scope of the
+	present work.
 	
-	However, adversaries may coordinate large numbers of actors.
-	While such coordination does not violate the linear bound,
-	it raises additional questions regarding economic feasibility,
-	incentive compatibility, and the potential emergence of
-	identity markets or participation outsourcing.
+	\subsection{Window Granularity and Temporal Modeling}
 	
-	Analyzing equilibrium behavior under large-scale coordinated
-	participation remains an important direction for future work.
+	The model partitions time into discrete windows and
+	defines adversarial cost over a horizon of $T$ windows.
+	Consequently, the interpretation of $r_{\min}$ and
+	$\tau$ depends on the chosen temporal granularity.
 	
-	\subsection{Hybrid Resource Models}
-	
-	Many real-world systems combine multiple resource classes,
-	such as capital, computational effort, and human participation.
-	
-	Our separation theorem applies cleanly to pure resource classes,
-	but hybrid constructions may exhibit intermediate scaling behavior.
-	For example, systems that combine stake-weighted influence
-	with rate-limited participation may simultaneously exhibit
-	parallelizable and throughput-bounded properties.
-	
-	Partial results for additive hybrid compositions are established
-	in Lemma~5 and Section~VIII-E, where the throughput-bounded
-	component is shown to dominate asymptotically under additive
-	cost decomposition. Characterizing adversarial scaling laws for
-	non-additive hybrid compositions and more general resource
-	interactions remains an open theoretical problem.
-	
-	\subsection{Adaptive and Evolving Resource Classes}
-	
-	Technological evolution may alter the structural properties
-	of resources over time.
-	For example, advances in automation or AI-driven participation
-	may increase effective throughput or reduce non-transferability.
-	
-	Our framework provides a structural lens for analyzing such changes,
-	but the validity of resource assumptions must be periodically
-	reassessed as system environments evolve.
-	
-	\subsection{Beyond Linear Scaling}
-	
-	This work distinguishes between sublinear and linear
-	identity-scaling regimes.
-	Other scaling geometries---such as superlinear or convex
-	adversarial cost growth---may arise under stronger
-	structural constraints.
-	
-	Identifying minimal structural conditions that enforce
-	stronger-than-linear identity cost remains an open
-	theoretical direction.
-	
-	\subsection{Protocol-Level Realization}
-	
-	The results of this paper are structural and protocol-agnostic.
-	Translating these guarantees into deployable systems
-	requires careful engineering of verification mechanisms,
-	incentive compatibility, and liveness properties.
-	
-	Bridging the structural theory of security resources
-	with fully composable distributed implementations
-	remains a promising avenue for future research.
-	
-	\subsection{Adaptive Economic Incentives and Governance Dynamics}
-	
-	The present framework models adversarial cost as a deterministic
-	function of resource allocation, abstracting away adaptive
-	economic behavior, endogenous governance dynamics,
-	and evolving participation incentives.
-	In practice, sustained identity cost may be influenced by
-	market prices for delegated resources, token inflation,
-	regulatory changes, and governance rules that adjust thresholds
-	in response to observed participation patterns.
-	The framework intentionally isolates structural resource
-	properties rather than modeling complete governance ecosystems.
-	Incorporating adaptive incentive structures and endogenous
-	governance dynamics remains an important direction for future work.
-	
-	\subsection{Automation and Evolving Throughput}
-	
-	The linear lower bound for rate-limited resources rests on the
-	assumption that per-identity throughput constraints are enforced
-	and cannot be circumvented by additional infrastructure.
-	Advances in automation, AI-driven participation, and hardware
-	acceleration may progressively reduce the effective cost of
-	provisioning independent execution channels, potentially narrowing
-	the practical gap between the two scaling regimes even when the
-	theoretical separation holds asymptotically.
-	The framework provides a structural lens for analyzing such
-	changes, but the validity of throughput assumptions should be
-	periodically reassessed as deployment environments evolve.
-	
-	\subsection{Socio-Economic Behaviors and Identity Markets}
-	
-	The model treats adversarial identity creation as a direct
-	resource acquisition problem, abstracting away socio-economic
-	coordination mechanisms.
-	In practice, identity markets, participation outsourcing,
-	and secondary markets for rate-limited credentials may alter
-	the effective cost structure in ways not captured by the
-	abstraction, potentially weakening non-transferability assumptions
-	in practice even when they hold structurally.
-	Analyzing equilibrium behavior in such settings remains outside
-	the scope of the present work.
+	Smaller windows increase renewal frequency under
+	throughput-bounded participation, while larger windows
+	may weaken window-local constraints by allowing resource
+	reuse across longer intervals.
+	Understanding how the scaling bounds depend on temporal
+	granularity—and developing window-independent formulations
+	of the separation results—remains an open direction for
+	future work.
 	
 	\subsection{Scope of the Framework}
 	
-	The results developed in this paper characterize adversarial
-	identity scaling under an abstract structural model.
-	The framework is not intended as a complete empirical taxonomy
-	of deployed systems, nor does it claim that all real-world
-	systems can be perfectly classified into purely divisible or
-	rate-limited categories.
-	Rather, it isolates structural properties that govern asymptotic
-	scaling behavior under explicit assumptions, providing a
-	complementary perspective alongside deployment-specific and
-	protocol-level analyses.
-	Real deployments may exhibit partial transferability,
-	imperfect throughput enforcement, or hybrid resource composition;
-	in such settings, the scaling geometry may interpolate between
-	the regimes characterized here.
+	The framework is intentionally structural and
+	protocol-agnostic.
+	It is not intended as a complete empirical taxonomy
+	of deployed systems, nor as a universally complete
+	characterization of all Sybil-resistance mechanisms.
 	
-	\subsection{Window Size and Temporal Granularity}
-	
-	The system model partitions time into discrete windows
-	of uniform size, and the adversarial cost function
-	$C(s,T)$ is defined over a horizon of $T$ such windows.
-	The choice of window size is therefore a modeling parameter
-	that affects how the results apply to concrete systems.
-	
-	Smaller windows correspond to finer temporal granularity,
-	increasing the number of renewal events required for
-	sustained participation under throughput-bounded resources.
-	In the limit of very small windows, the per-window
-	activation cost $r_{\min}$ may approach zero while $T$
-	grows proportionally, leaving the product $r_{\min} \cdot T$
-	roughly constant. The linear lower bound
-	$C(s,T) \geq r_{\min} \cdot sT$ therefore remains
-	meaningful provided that $r_{\min}$ and $T$ are
-	calibrated consistently with the chosen window granularity.
-	
-	Larger windows reduce the number of renewal events
-	but may allow adversaries to concentrate resource
-	expenditure within a single window, potentially
-	relaxing the window-locality constraint.
-	Systems in which resource allocation persists across
-	multiple windows should be modeled with correspondingly
-	larger $r_{\min}$ or reduced effective $T$.
-	
-	More generally, the window size assumption interacts
-	with the throughput bound $\tau$ and the activation
-	threshold $r_{\min}$ in ways that depend on the
-	deployment context. Characterizing the sensitivity
-	of the scaling bounds to window granularity---and
-	identifying window-size-independent formulations
-	of the structural separation---remains an open
-	direction for future work.
+	Rather, the results isolate resource properties that
+	govern asymptotic adversarial scaling under explicit
+	assumptions, providing a complementary perspective
+	alongside deployment-specific security analyses and
+	protocol-level evaluations.
 	
 	% ============================================================
-	\section{Analytical Illustrations of Scaling Regimes}
-	\label{sec:evaluation}
+	\section{Illustrative Scaling Examples}
+	\label{sec:illustrations}
 	
-	We visualize the cost functions implied by Theorems~1 and~2
-	under parametric variation.
-	These are analytical illustrations of asymptotic scaling
-	behavior derived from the theoretical model---not
-	empirical benchmarks or experimental proofs.
+	\noindent\textbf{Note.}
+	The figures and tables in this section are direct closed-form
+	visualizations of the analytical cost functions derived in
+	Theorems~1--2.
+	They are not empirical evaluations, simulations, benchmarks,
+	or validations of deployed systems.
+	Their purpose is to make the asymptotic scaling regimes
+	concrete across representative parameter ranges.
 	
-	\subsection{Setup}
+	\medskip
+	We plot $C_{\mathrm{par}}(s,T)=s\,r_{\min}+h(s,T)$
+	and $C_{\mathrm{bnd}}(s,T)=sT\,r_{\min}$, with $r_{\min}=1.0$.
 	
-	We evaluate the model cost functions directly:
-	$C_{\mathrm{par}}(s,T) = s \cdot r_{\min} + h(s,T)$
-	for divisible resources (one-time stock acquisition plus
-	coordination overhead), and
-	$C_{\mathrm{bnd}}(s,T) = s \cdot T \cdot r_{\min}$
-	for rate-limited resources (mandatory per-identity,
-	per-window expenditure).
-	Throughout, $r_{\min} = 1.0$.
-	For E4, three coordination models are tested:
-	$h_1 = s + T$, $h_2 = s\log T$, $h_3 = s\sqrt{T}$,
-	all satisfying $h(s,T) = o(sT)$.
+	\subsection{Example~1: Identity Scaling}
 	
-	\subsection{E1: Identity Scaling ($T=100$, vary $s$)}
-	
-	The normalized cost $C_{\mathrm{par}}(s,T)/sT$ decreases
-	monotonically from $1.02$ at $s=1$ to $0.03$ at $s=100$,
-	consistent with $C(s,T)=o(sT)$ (Theorem~1).
-	The rate-limited ratio remains at $1.0$ for all $s$,
-	consistent with $C(s,T)=\Theta(sT)$ (Theorem~2).
+	Fixing $T=100$, the normalized divisible cost $C_{\mathrm{par}}/(sT)$
+	decays monotonically while the throughput-bounded ratio is constant.
 	
 	\begin{table}[!htbp]
 		\centering
 		\small
-		\caption{E1: Normalized adversarial cost $C(s,T)/sT$
+		\caption{Example~1: Normalized adversarial cost $C(s,T)/sT$
 			($T=100$, $r_{\min}=1.0$, $h = s+T$).}
-		\label{tab:e1}
+		\label{tab:ex1}
 		\renewcommand{\arraystretch}{1.2}
 		\begin{tabular}{@{}rrrrr@{}}
 			\toprule
@@ -2444,27 +2199,26 @@
 	\begin{figure}[!htbp]
 		\centering
 		\includegraphics[width=\columnwidth]{fig_e1_identity_scaling.pdf}
-		\caption{E1: Normalized adversarial cost $C(s,T)/sT$
+		\caption{Example~1: Normalized adversarial cost $C(s,T)/sT$
 			vs.\ $s$ ($T=100$).
-			Divisible-resource ratio decays toward zero
-			(Theorem~1); rate-limited ratio is constant at
-			$r_{\min}$ (Theorem~2).}
-		\label{fig:e1}
+			The divisible-resource ratio decays toward zero,
+			while the throughput-bounded ratio remains fixed at
+			$r_{\min}$.}
+		\label{fig:ex1}
 	\end{figure}
 	
-	\subsection{E2: Time Horizon Scaling ($s=10$, vary $T$)}
+	\subsection{Example~2: Time-Horizon Scaling}
 	
-	$C_{\mathrm{par}}$ grows as $O(s+T)$, well below $sT$,
-	while $C_{\mathrm{bnd}}$ tracks $sT r_{\min}$ exactly.
-	The normalized divisible ratio continues to decrease as $T$
-	grows, consistent with Theorem~1.
+	Fixing $s=10$, the divisible cost grows as $O(s+T)$ while
+	the throughput-bounded cost scales linearly; the normalized
+	divisible ratio decreases as $T$ grows.
 	
 	\begin{table}[!htbp]
 		\centering
 		\small
-		\caption{E2: Normalized cost $C(s,T)/sT$
+		\caption{Example~2: Normalized cost $C(s,T)/sT$
 			($s=10$, $r_{\min}=1.0$, $h = s+T$).}
-		\label{tab:e2}
+		\label{tab:ex2}
 		\renewcommand{\arraystretch}{1.2}
 		\begin{tabular}{@{}rrrrr@{}}
 			\toprule
@@ -2484,343 +2238,98 @@
 	\begin{figure}[!htbp]
 		\centering
 		\includegraphics[width=\columnwidth]{fig_e2_time_scaling.pdf}
-		\caption{E2: $C(s,T)$ vs.\ $T$ ($s=10$).
-			Divisible cost grows sublinearly; rate-limited
-			cost is linear in $T$ (Theorems~1--2).}
-		\label{fig:e2}
-	\end{figure}
-	
-	\subsection{E3: Marginal Identity Cost ($T=100$)}
-	
-	$\Delta_{\mathrm{par}}(s,T) = O(1)$ for all $s$;
-	$\Delta_{\mathrm{bnd}}(s,T) = T \cdot r_{\min} = 100$
-	throughout.
-	The latter is consistent with the lower bound
-	$\liminf_{s\to\infty}\Delta(s,T) \ge r_{\min} T$
-	established in Theorem~2.
-	
-	\begin{figure}[!htbp]
-		\centering
-		\includegraphics[width=\columnwidth]{fig_e3_marginal_cost.pdf}
-		\caption{E3: Marginal cost $\Delta(s,T)$ vs.\ $s$
-			($T=100$).
-			Rate-limited: $\Delta = T \cdot r_{\min} = 100$
-			(Theorem~2 lower bound, dashed).
-			Divisible: $\Delta = O(1) = o(T)$ (Theorem~1).}
-		\label{fig:e3}
-	\end{figure}
-	
-	\subsection{E4: Coordination Overhead Robustness ($T=100$)}
-	
-	All three models yield $C_{\mathrm{par}}(s,T)/sT \to 0$,
-	well below the rate-limited baseline of $1.0$.
-	The sublinear regime is robust across the class $h(s,T)=o(sT)$,
-	consistent with Assumption~\ref{ass:coordination}.
-	
-	\begin{table}[!htbp]
-		\centering
-		\small
-		\caption{E4: $C_{\mathrm{par}}(s,T)/sT$ under three
-			overhead models ($T=100$, $r_{\min}=1.0$).}
-		\label{tab:e4}
-		\renewcommand{\arraystretch}{1.2}
-		\begin{tabular}{@{}rrrrr@{}}
-			\toprule
-			$s$ & $h_1{=}s{+}T$ & $h_2{=}s\log T$
-			& $h_3{=}s\sqrt{T}$ & Bounded \\
-			\midrule
-			1   & 1.0200 & 0.0562 & 0.1100 & 1.0000 \\
-			5   & 0.2200 & 0.0562 & 0.1100 & 1.0000 \\
-			10  & 0.1200 & 0.0562 & 0.1100 & 1.0000 \\
-			25  & 0.0600 & 0.0562 & 0.1100 & 1.0000 \\
-			50  & 0.0400 & 0.0562 & 0.1100 & 1.0000 \\
-			100 & 0.0300 & 0.0562 & 0.1100 & 1.0000 \\
-			\bottomrule
-		\end{tabular}
-	\end{table}
-	
-	\begin{figure}[!htbp]
-		\centering
-		\includegraphics[width=\columnwidth]{fig_e4_coordination.pdf}
-		\caption{E4: $C_{\mathrm{par}}(s,T)/sT$ under three
-			overhead models, all satisfying $h=o(sT)$.
-			All decay toward zero (Theorem~1); rate-limited
-			baseline (solid) remains at $r_{\min}$ (Theorem~2).}
-		\label{fig:e4}
+		\caption{Example~2: Total adversarial cost $C(s,T)$ vs.\ $T$
+			($s=10$).
+			The throughput-bounded regime scales linearly with
+			the time horizon, whereas the divisible-resource
+			regime remains asymptotically sublinear relative to
+			$sT$.}
+		\label{fig:ex2}
 	\end{figure}
 	
 	\smallskip
 	\noindent
-	Illustrations E1--E4 are drawn from the theoretical cost
-	functions and do not constitute experimental evidence about
-	deployed systems.
-	They confirm that both scaling regimes are consistent across
-	the model parameter space, and that the marginal cost bound
-	of Theorem~2 is tight.
+	The illustrations above are derived directly from the
+	analytical model and are intended to visualize the asymptotic
+	behavior of the two scaling regimes across representative
+	parameter ranges.
 	% ============================================================
-	\section{Conclusion}
-	
-	This paper proposed an axiomatic framework for reasoning about
-	adversarial identity scaling in open systems through the lens
-	of resource structure.
-	The central contribution is not a universally complete
-	characterization of Sybil resistance, but a resource-centric
-	asymptotic perspective that complements existing protocol-level
-	and economic analyses.
-	
-	We formalized resource properties---divisibility, additivity of
-	influence, temporal reusability, identity transferability, and
-	throughput boundedness---and showed that these properties indicate
-	the asymptotic geometry of sustained adversarial cost under the
-	coordination model considered.
-	Within the present abstraction, resources satisfying divisibility
-	and reusability admit identity amortization, suggesting a
-	structural tendency toward sublinear per-identity cost.
-	Conversely, rate-limited, non-transferable, window-local resources
-	indicate the scaling regime $C(s,T)=\Omega(sT)$.
-	
-	Analytical illustrations confirmed that these two scaling regimes
-	are consistent across varying identity counts, time horizons, and
-	coordination overhead models within the framework, and that the
-	marginal cost bound associated with rate-limited resources is tight.
-	These illustrations are drawn from the theoretical cost functions
-	and do not constitute experimental evidence about deployed systems.
-	
-	Taken together, these results suggest an asymptotic boundary
-	in the design space of open systems.
-	Under the assumptions considered, mechanisms grounded in fully
-	divisible and reusable resources may be insufficient to enforce
-	linear per-identity cost under the considered assumptions.
-	Security guarantees at the identity layer are therefore
-	constrained not only by aggregate resource scarcity,
-	but by the structural properties of the resource used to
-	regulate participation.
-	
-	This perspective is intended as a complement to, rather than a
-	replacement of, existing security analyses.
-	Classical consensus models and economic equilibrium analyses
-	capture important adversarial dimensions outside the scope of
-	this work.
-	The framework here isolates a different dimension: the degree to
-	which resource divisibility and reusability enable adversarial
-	cost amortization across identities and time.
-	
-	Future work includes characterization of hybrid resource
-	compositions, mechanisms for enforcing practical throughput bounds,
-	analysis of equilibrium behavior under adaptive economic incentives,
-	and empirical measurement of identity-scaling behavior in live
-	open systems.
+\section{Conclusion}
+
+This paper proposed an axiomatic framework for analyzing
+adversarial identity scaling through the structural properties
+of security resources. We formalized divisibility, temporal
+reusability, identity transferability, and throughput boundedness,
+and showed that these properties determine the asymptotic
+scaling behavior of sustained adversarial cost within the
+considered model.
+
+Parallelizable resources admit identity amortization, yielding
+sublinear scaling $C(s,T)=o(sT)$, whereas throughput-bounded,
+non-transferable resources enforce the linear regime
+$C(s,T)=\Omega(sT)$. For hybrid systems, Lemma~5 shows
+that a throughput-bounded component preserves the linear
+lower bound under additive decomposition.
+
+Illustrative scaling examples and lightweight systems anchoring
+showed that the structural conditions modeled here correspond
+to observable participation patterns in deployed PoW, PoS,
+and governance systems.
+
+The results suggest that aggregate scarcity alone may be
+insufficient to enforce linear per-identity cost when the
+underlying resource remains fully divisible and reusable.
+Identity-level security therefore depends not only on aggregate
+resource ownership, but also on the structural constraints of
+the participation resource itself.
+
+Future work includes hybrid resource characterization beyond
+additive decomposition, practical throughput-enforcement
+mechanisms, equilibrium analysis under adaptive incentives,
+and empirical measurement of identity-scaling behavior in
+deployed systems.
 	% ============================================================
 	\appendices
 	
 	% ============================================================
-	\section{Tightness and Robustness of the Scaling Bounds}
+	\section{Tightness of the Scaling Bounds}
 	% ============================================================
 	
-	This appendix establishes that the asymptotic bounds derived in
-	Theorems~1 and~2 are tight and remain robust under several
-	extensions of the adversarial model.
+	Both scaling regimes are asymptotically tight.
 	
-	In particular, we construct explicit adversarial strategies that
-	match the asymptotic upper and lower bounds associated with the
-	two structural resource classes introduced in this work.
-	These constructions demonstrate that the separation between
-	sublinear and linear identity-scaling regimes is not merely
-	qualitative, but asymptotically exact.
+	\paragraph{Parallelizable resources.}
+	An adversary acquires $r = s\,r_{\min}$ once; by temporal
+	reusability this suffices for all $T$ windows.
+	Total cost satisfies $C(s,T) \le s\,r_{\min} + h(s,T)$.
+	Since $h(s,T)=o(sT)$ (Assumption~1),
+	$C(s,T)/sT \le r_{\min}/T + h(s,T)/(sT) \to 0$
+	as $s,T\to\infty$, confirming $C(s,T)=o(sT)$.
 	
-	% ============================================================
-	\subsection{Tightness for Parallelizable Resources}
-	
-	Let $R$ be a parallelizable resource satisfying divisibility,
-	additivity of influence, temporal reusability, and identity
-	transferability.
-	
-	By the activation threshold (Definition~1), sustaining $s$
-	identities requires aggregate allocation at least
-	$r \ge s\,r_{\min}$.
-	For a parallelizable resource the adversary acquires this
-	aggregate \emph{once}: by temporal reusability, the allocation
-	$r = s\,r_{\min}$ suffices for all $T$ windows without
-	renewed expenditure.
-	
-	By divisibility, the adversary partitions $r$ into components
-	$r_1,\dots,r_s$ with $\sum_{i=1}^{s} r_i = r$.
-	By additivity of influence,
-	\[
-	\sum_{i=1}^{s} f(r_i)
-	=
-	f\!\left(\sum_{i=1}^{s} r_i\right)
-	=
-	f(r).
-	\]
-	
-	Hence total influence is invariant under identity partitioning.
-	The total adversarial cost satisfies
-	\[
-	C(s,T) \le s\,r_{\min} + h(s,T).
-	\]
-	
-	Under Assumption~1, $h(s,T)=o(sT)$. Therefore
-	\[
-	\frac{C(s,T)}{sT}
-	\le
-	\frac{r_{\min}}{T}
-	+
-	\frac{h(s,T)}{sT}
-	\to 0
-	\qquad \text{as } s,T \to \infty \text{ jointly},
-	\]
-	since the first term vanishes as $T\to\infty$ and the
-	second by assumption.
-	
-	Thus $C(s,T)=o(sT)$, confirming that the sublinear
-	scaling regime of Theorem~1 is asymptotically tight.
-	
-	
-	% ============================================================
-	\subsection{Tightness for Throughput-Bounded Resources}
-	% ============================================================
-	
-	Let $R$ be a throughput-bounded resource satisfying
-	Definition~6, with activation threshold $r_{\min}$
-	and window-local allocation.
-	
-	Consider an adversary sustaining $s$ identities over
-	$T$ windows.
-	
-	By construction, each identity must receive at least
-	$r_{\min}$ units of resource within every active window.
-	Allocating
-	\[
-	r_v(t)=r_{\min}
-	\]
-	for all identities $v$ and windows $t$ yields total cost
-	\[
-	C(s,T)
-	=
-	\sum_{t=1}^{T}
-	\sum_{v=1}^{s}
-	r_{\min}.
-	\]
-	
-	Evaluating the sum gives
-	\[
-	C(s,T)=sT r_{\min}.
-	\]
-	
-	Therefore,
-	\[
-	C(s,T)=\Theta(sT),
-	\]
-	which matches the lower bound established in Theorem~2.
-	
-	Hence the linear scaling regime is also asymptotically tight.
-	
-	\medskip
-	\noindent
-	Together, these constructions establish that the two asymptotic
-	regimes identified in this paper represent tight structural
-	characterizations of adversarial identity scaling.
-	
+	\paragraph{Throughput-bounded resources.}
+	Setting $r_v(t)=r_{\min}$ for all $v,t$ achieves
+	$C(s,T)=sT\,r_{\min}=\Theta(sT)$,
+	matching the lower bound of Theorem~2 exactly.
+	Both regimes are therefore tight.
 	% ============================================================
 	\section{Robustness Under Extended Adversarial Models}
+	
+	The results of Theorems~1--2 are robust under several natural
+	extensions.
+	Under \emph{adaptive identity creation}, divisible resources
+	still permit repartitioning; each newly activated throughput-bounded
+	identity still requires per-window renewal, preserving
+	$C(s,T)=\Omega(sT)$.
+	Under \emph{coalitions}, sustaining $s$ identities still
+	requires $s$ independent channels regardless of coordination
+	structure.
+	Under \emph{stochastic throughput} with
+	$\mathbb{E}[\tau_v(t)]\le\tau$, expected cost satisfies
+	$\mathbb{E}[C(s,T)]=\Omega(sT)$, with linear scaling
+	holding with high probability under standard concentration bounds.
+	If a system only partially satisfies either regime's structural
+	properties, cost may interpolate between the two scaling classes.
 	% ============================================================
 	
-	We now examine the robustness of the scaling results under
-	natural extensions of the adversarial model.
-	
-	The objective is not to characterize every possible adversarial
-	behavior, but to demonstrate that the structural separation
-	remains stable under several realistic variations.
-	
-	% ============================================================
-	\subsection{Adaptive Identity Creation}
-	% ============================================================
-	
-	Suppose the adversary creates identities adaptively over time.
-	
-	Under parallelizable resources, adaptive creation does not alter
-	the scaling regime, since aggregate resource ownership may still
-	be repartitioned across newly created identities.
-	
-	Under throughput-bounded resources, each newly activated identity
-	must continue to satisfy the per-window activation threshold.
-	Therefore adaptive creation preserves the lower bound
-	\[
-	C(s,T)=\Omega(sT).
-	\]
-	
-	% ============================================================
-	\subsection{Coalitions of Independent Actors}
-	% ============================================================
-	
-	Suppose an adversary coordinates $k$ independent actors, each
-	associated with a throughput-bounded execution channel.
-	
-	Although aggregate throughput increases with $k$, sustaining
-	$s$ concurrent identities still requires at least $s$
-	independent channels.
-	
-	Thus coalition formation does not invalidate the linear lower
-	bound, and
-	\[
-	C(s,T)=\Omega(sT)
-	\]
-	continues to hold.
-	
-	% ============================================================
-	\subsection{Stochastic Throughput Bounds}
-	% ============================================================
-	
-	Consider a setting in which throughput is stochastic but bounded
-	in expectation.
-	
-	Let $\tau_v(t)$ denote the random throughput available to
-	identity $v$ during window $t$, with bounded expectation
-	\[
-	\mathbb{E}[\tau_v(t)] \le \tau.
-	\]
-	
-	If sustained participation requires expected activation
-	threshold $r_{\min}$ per identity per window, then expected
-	total expenditure satisfies
-	\[
-	\mathbb{E}[C(s,T)] = \Omega(sT).
-	\]
-	
-	Under standard concentration assumptions, deviations from the
-	expected cost remain bounded with high probability, preserving
-	linear scaling asymptotically.
-	
-	% ============================================================
-	\subsection{Partial Relaxation of Structural Properties}
-	% ============================================================
-	
-	The framework developed in this paper characterizes two
-	extremal structural regimes: fully parallelizable resources
-	and fully throughput-bounded resources.
-	
-	Intermediate systems may partially satisfy transferability,
-	temporal locality, or throughput boundedness.
-	In such cases, adversarial scaling behavior may interpolate
-	between the asymptotic regimes established in Theorems~1--2.
-	
-	For example, if only a fraction of aggregate allocation is
-	transferable across identities, the adversary may amortize
-	only that component of the resource.
-	Likewise, bounded temporal reuse across a limited number of
-	windows may reduce, but not eliminate, sustained expenditure.
-	
-	These intermediate cases suggest a continuum of scaling
-	behaviors between sublinear amortization and linear growth.
-	
-	Formal characterization of such transition regimes, including
-	potential phase boundaries between amortizable and
-	non-amortizable resources, remains an important direction
-	for future work.
-	
-	
-	% ============================================================
 	\bibliographystyle{IEEEtran}
 	\bibliography{references}
 	% ============================================================
