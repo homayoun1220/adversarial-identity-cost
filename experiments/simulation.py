@@ -1,27 +1,3 @@
-"""
-generate_figures.py
-────────────────────────────────────────────────────────────
-Generates all figures for:
-
-  "The Geometry of Adversarial Identity Cost:
-   Structural Limits of Sybil Resistance in Open Systems"
-
-Output files
-────────────
-  fig2_theorem_validation.pdf   ← Section VIII  (was already in paper)
-  fig_e1_identity_scaling.pdf   ─┐
-  fig_e2_time_scaling.pdf        │ Section XI
-  fig_e3_marginal_cost.pdf       │ (Simulation Study, added)
-  fig_e4_coordination.pdf       ─┘
-
-Usage
-────────────────────────────────────────────────────────────
-  python generate_figures.py
-
-All PDFs are saved to ./outputs/
-────────────────────────────────────────────────────────────
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -32,9 +8,7 @@ from pathlib import Path
 OUT = Path(__file__).parent / "outputs"
 OUT.mkdir(parents=True, exist_ok=True)
 
-# ─────────────────────────────────────────────
-# Style
-# ─────────────────────────────────────────────
+
 plt.rcParams.update({
     "font.family":      "serif",
     "font.size":        11,
