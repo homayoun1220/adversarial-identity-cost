@@ -1,0 +1,7 @@
+Highlights
+
+• Scarcity alone is insufficient: resource structure determines influence cost.
+• Parallelizable resources admit C(s,T)=o(sT) regardless of protocol design.
+• Throughput-bounded resources enforce C(s,T)=Omega(sT): a sharp separation.
+• Resource Substitution Principle: linear cost requires breaking parallelizability.
+• Calibration on Ethereum PoS and Bitcoin PoW confirms the gap is quantitative.

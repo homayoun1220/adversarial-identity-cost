@@ -1,0 +1,108 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: document.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: references.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty address in alwen2019blockchain
+Warning--page numbers missing in both pages and numpages fields in alwen2019blockchain
+Warning--empty address in bonneau2015sok
+Warning--empty address in borge2017pop
+Warning--empty address in budish2024economic
+Warning--page numbers missing in both pages and numpages fields in budish2024economic
+Warning--empty address in carlsten2016instability
+Warning--empty address in castro1999pbft
+Warning--empty address in chu2023ratelimited
+Warning--page numbers missing in both pages and numpages fields in chu2023ratelimited
+Warning--empty address in danezis2009sybilinfer
+Warning--page numbers missing in both pages and numpages fields in danezis2009sybilinfer
+Warning--can't use both volume and number fields in davidson2018privacypass
+Warning--empty publisher in davidson2018privacypass
+Warning--empty address in davidson2018privacypass
+Warning--empty address in douceur2002sybil
+Warning--empty address in eyal2018bitcoinng
+Warning--empty address in eyal2014majority
+Warning--empty publisher in ford2020pseudonym
+Warning--empty address in ford2020pseudonym
+Warning--page numbers missing in both pages and numpages fields in ford2020pseudonym
+Warning--empty address in garay2015backbone
+Warning--empty address in gencer2018decentralization
+Warning--empty booktitle in gervais2014isbitcoin
+Warning--empty address in gervais2016security
+Warning--empty address in gilad2017algorand
+Warning--empty address in kiayias2020genesis
+Warning--empty address in kiayias2018ouroboros
+Warning--empty address in kiayias2017ouroboros
+Warning--empty publisher in kroll2013economics
+Warning--empty address in kroll2013economics
+Warning--page numbers missing in both pages and numpages fields in kroll2013economics
+Warning--empty address in lesniewski2020analysis
+Warning--page numbers missing in both pages and numpages fields in lesniewski2020analysis
+Warning--empty address in levy1984capability
+Warning--empty address in li2017sybilcontrol
+Warning--page numbers missing in both pages and numpages fields in li2017sybilcontrol
+Warning--empty address in micali1999vrf
+Warning--empty address in miller2016honeybadger
+Warning--empty address in narayanan2016bitcoinbook
+Warning--empty booktitle in neudecker2019network
+Warning--empty address in pass2017fruitchains
+Warning--empty address in pass2017hybrid
+Warning--empty address in pass2016snowwhite
+Warning--empty publisher in ren2019nakamoto
+Warning--empty address in ren2019nakamoto
+Warning--page numbers missing in both pages and numpages fields in ren2019nakamoto
+Warning--no number and no volume in rosenfeld2011analysis
+Warning--page numbers missing in both pages and numpages fields in rosenfeld2011analysis
+Warning--empty address in wang2019attack
+Warning--page numbers missing in both pages and numpages fields in wang2019attack
+Warning--empty address in yu2006sybilguard
+Warning--empty address in yu2008sybillimit
+You've used 47 entries,
+            5981 wiz_defined-function locations,
+            1726 strings with 26510 characters,
+and the built_in function-call counts, 51560 in all, are:
+= -- 5852
+> -- 1498
+< -- 1
++ -- 508
+- -- 526
+* -- 3444
+:= -- 4903
+add.period$ -- 240
+call.type$ -- 47
+change.case$ -- 317
+chr.to.int$ -- 44
+cite$ -- 100
+duplicate$ -- 5040
+empty$ -- 3529
+format.name$ -- 655
+if$ -- 12396
+int.to.chr$ -- 5
+int.to.str$ -- 1
+missing$ -- 194
+newline$ -- 394
+num.names$ -- 326
+pop$ -- 2151
+preamble$ -- 1
+purify$ -- 687
+quote$ -- 0
+skip$ -- 1880
+stack$ -- 0
+substring$ -- 3765
+swap$ -- 462
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 1294
+warning$ -- 53
+while$ -- 311
+width$ -- 0
+write$ -- 935
+(There were 53 warnings)

@@ -1,0 +1,581 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{47}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Alwen et~al\mbox{.}(2020)]%
+        {alwen2019blockchain}
+\bibfield{author}{\bibinfo{person}{Jo{\"e}l Alwen}, \bibinfo{person}{Jeremiah
+  Blocki}, {and} \bibinfo{person}{Krzysztof Pietrzak}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Sustained Space and Idling Time Complexity of
+  Cryptographic Proofs of Sequential Work}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 11th Innovations in Theoretical
+  Computer Science Conference (ITCS)}}. \bibinfo{publisher}{Schloss Dagstuhl}.
+\newblock
+
+
+\bibitem[Bonneau et~al\mbox{.}(2015)]%
+        {bonneau2015sok}
+\bibfield{author}{\bibinfo{person}{Joseph Bonneau}, \bibinfo{person}{Andrew
+  Miller}, \bibinfo{person}{Jeremy Clark}, \bibinfo{person}{Arvind Narayanan},
+  \bibinfo{person}{Joshua~A. Kroll}, {and} \bibinfo{person}{Edward~W. Felten}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{{SoK}: Research Perspectives and Challenges for
+  {Bitcoin} and Cryptocurrencies}. In \bibinfo{booktitle}{\emph{Proceedings of
+  the IEEE Symposium on Security and Privacy (S\&P)}}.
+  \bibinfo{publisher}{IEEE}, \bibinfo{pages}{104--121}.
+\newblock
+
+
+\bibitem[Borge et~al\mbox{.}(2017)]%
+        {borge2017pop}
+\bibfield{author}{\bibinfo{person}{Maria Borge}, \bibinfo{person}{Eleftherios
+  Kokoris-Kogias}, \bibinfo{person}{Philipp Jovanovic}, \bibinfo{person}{Linus
+  Gasser}, \bibinfo{person}{Nicolas Gailly}, {and} \bibinfo{person}{Bryan
+  Ford}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Proof-of-Personhood: Redemocratizing Permissionless
+  Cryptocurrencies}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE
+  European Symposium on Security and Privacy Workshops (EuroS\&PW)}}.
+  \bibinfo{publisher}{IEEE}, \bibinfo{pages}{23--26}.
+\newblock
+
+
+\bibitem[Budish(2018)]%
+        {budish2018economic}
+\bibfield{author}{\bibinfo{person}{Eric Budish}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The Economic Limits of {Bitcoin} and the
+  Blockchain}}.
+\newblock \bibinfo{type}{Working Paper} 24717. \bibinfo{institution}{National
+  Bureau of Economic Research}.
+\newblock
+
+
+\bibitem[Budish et~al\mbox{.}(2024)]%
+        {budish2024economic}
+\bibfield{author}{\bibinfo{person}{Eric Budish}, \bibinfo{person}{Andrew
+  Lewis-Pye}, {and} \bibinfo{person}{Tim Roughgarden}.}
+  \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{The Economic Limits of Permissionless Consensus:
+  Currency, Payments, Smart Contracts}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the ACM Conference on Economics and
+  Computation (EC)}}. \bibinfo{publisher}{ACM}.
+\newblock
+
+
+\bibitem[Carlsten et~al\mbox{.}(2016)]%
+        {carlsten2016instability}
+\bibfield{author}{\bibinfo{person}{Miles Carlsten}, \bibinfo{person}{Harry
+  Kalodner}, \bibinfo{person}{S.~Matthew Weinberg}, {and}
+  \bibinfo{person}{Arvind Narayanan}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{On the Instability of {Bitcoin} Without the Block
+  Reward}. In \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGSAC
+  Conference on Computer and Communications Security (CCS)}}.
+  \bibinfo{publisher}{ACM}, \bibinfo{pages}{154--167}.
+\newblock
+
+
+\bibitem[Castro and Liskov(1999)]%
+        {castro1999pbft}
+\bibfield{author}{\bibinfo{person}{Miguel Castro} {and}
+  \bibinfo{person}{Barbara Liskov}.} \bibinfo{year}{1999}\natexlab{}.
+\newblock \showarticletitle{Practical {Byzantine} Fault Tolerance}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 3rd Symposium on Operating
+  Systems Design and Implementation (OSDI)}}. \bibinfo{publisher}{USENIX
+  Association}, \bibinfo{pages}{173--186}.
+\newblock
+
+
+\bibitem[Chu et~al\mbox{.}(2023)]%
+        {chu2023ratelimited}
+\bibfield{author}{\bibinfo{person}{Hien Chu} {et~al\mbox{.}}}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{On the Security of Rate-limited {Privacy Pass}}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGSAC Conference on
+  Computer and Communications Security (CCS)}}. \bibinfo{publisher}{ACM}.
+\newblock
+
+
+\bibitem[Costan and Devadas(2016)]%
+        {costan2016intel}
+\bibfield{author}{\bibinfo{person}{Victor Costan} {and}
+  \bibinfo{person}{Srinivas Devadas}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \bibinfo{title}{{Intel SGX} Explained}.
+\newblock \bibinfo{howpublished}{Cryptology ePrint Archive, Report 2016/086}.
+\newblock
+\newblock
+\shownote{Available at \url{https://eprint.iacr.org/2016/086}}.
+
+
+\bibitem[Danezis and Mittal(2009)]%
+        {danezis2009sybilinfer}
+\bibfield{author}{\bibinfo{person}{George Danezis} {and}
+  \bibinfo{person}{Prateek Mittal}.} \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{{SybilInfer}: Detecting {Sybil} Nodes using Social
+  Networks}. In \bibinfo{booktitle}{\emph{Proceedings of the Network and
+  Distributed System Security Symposium (NDSS)}}. \bibinfo{publisher}{Internet
+  Society}.
+\newblock
+
+
+\bibitem[Davidson et~al\mbox{.}(2018)]%
+        {davidson2018privacypass}
+\bibfield{author}{\bibinfo{person}{Alex Davidson}, \bibinfo{person}{Ian
+  Goldberg}, \bibinfo{person}{Nick Sullivan}, \bibinfo{person}{George
+  Tankersley}, {and} \bibinfo{person}{Filippo Valsorda}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Privacy Pass: Bypassing Internet Challenges
+  Anonymously}. In \bibinfo{booktitle}{\emph{Proceedings on Privacy Enhancing
+  Technologies (PoPETs)}}, Vol.~\bibinfo{volume}{2018}.
+  \bibinfo{pages}{164--180}.
+\newblock
+
+
+\bibitem[Douceur(2002)]%
+        {douceur2002sybil}
+\bibfield{author}{\bibinfo{person}{John~R. Douceur}.}
+  \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{The {Sybil} Attack}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 1st International Workshop on
+  Peer-to-Peer Systems (IPTPS)}} \emph{(\bibinfo{series}{LNCS},
+  Vol.~\bibinfo{volume}{2429})}. \bibinfo{publisher}{Springer},
+  \bibinfo{pages}{251--260}.
+\newblock
+
+
+\bibitem[Eyal et~al\mbox{.}(2016)]%
+        {eyal2018bitcoinng}
+\bibfield{author}{\bibinfo{person}{Ittay Eyal}, \bibinfo{person}{Adem~Efe
+  Gencer}, \bibinfo{person}{Emin~G{\"u}n Sirer}, {and} \bibinfo{person}{Robbert
+  van Renesse}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{{Bitcoin-NG}: A Scalable Blockchain Protocol}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 13th USENIX Symposium on
+  Networked Systems Design and Implementation (NSDI)}}.
+  \bibinfo{publisher}{USENIX Association}, \bibinfo{pages}{45--59}.
+\newblock
+
+
+\bibitem[Eyal and Sirer(2014)]%
+        {eyal2014majority}
+\bibfield{author}{\bibinfo{person}{Ittay Eyal} {and}
+  \bibinfo{person}{Emin~G{\"u}n Sirer}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Majority Is Not Enough: {Bitcoin} Mining Is
+  Vulnerable}. In \bibinfo{booktitle}{\emph{Proceedings of the 18th
+  International Conference on Financial Cryptography and Data Security (FC)}}
+  \emph{(\bibinfo{series}{LNCS}, Vol.~\bibinfo{volume}{8437})}.
+  \bibinfo{publisher}{Springer}, \bibinfo{pages}{436--454}.
+\newblock
+
+
+\bibitem[Ford(2020)]%
+        {ford2020pseudonym}
+\bibfield{author}{\bibinfo{person}{Bryan Ford}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Pseudonym Pairs: Scalable and Accountable Proof of
+  Personhood}. In \bibinfo{booktitle}{\emph{Proceedings of the Workshop on
+  Decentralized Finance and Security (DeFi Security)}}.
+\newblock
+
+
+\bibitem[Garay et~al\mbox{.}(2015)]%
+        {garay2015backbone}
+\bibfield{author}{\bibinfo{person}{Juan~A. Garay}, \bibinfo{person}{Aggelos
+  Kiayias}, {and} \bibinfo{person}{Nikos Leonardos}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{The Bitcoin Backbone Protocol: Analysis and
+  Applications}. In \bibinfo{booktitle}{\emph{Advances in Cryptology --
+  {EUROCRYPT} 2015}} \emph{(\bibinfo{series}{LNCS},
+  Vol.~\bibinfo{volume}{9057})}. \bibinfo{publisher}{Springer},
+  \bibinfo{pages}{281--310}.
+\newblock
+
+
+\bibitem[Gencer et~al\mbox{.}(2018)]%
+        {gencer2018decentralization}
+\bibfield{author}{\bibinfo{person}{Adem~Efe Gencer}, \bibinfo{person}{Soumya
+  Basu}, \bibinfo{person}{Ittay Eyal}, \bibinfo{person}{Robbert van Renesse},
+  {and} \bibinfo{person}{Emin~G{\"u}n Sirer}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Decentralization in {Bitcoin} and {Ethereum}
+  Networks}. In \bibinfo{booktitle}{\emph{Proceedings of the 22nd International
+  Conference on Financial Cryptography and Data Security (FC)}}
+  \emph{(\bibinfo{series}{LNCS}, Vol.~\bibinfo{volume}{10957})}.
+  \bibinfo{publisher}{Springer}, \bibinfo{pages}{439--457}.
+\newblock
+
+
+\bibitem[Gervais et~al\mbox{.}(2014)]%
+        {gervais2014isbitcoin}
+\bibfield{author}{\bibinfo{person}{Arthur Gervais}, \bibinfo{person}{Ghassan~O.
+  Karame}, \bibinfo{person}{Vedran Capkun}, {and} \bibinfo{person}{Srdjan
+  Capkun}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Is {Bitcoin} a Decentralized Currency?}
+\newblock \bibinfo{journal}{\emph{IEEE Security \& Privacy}}
+  \bibinfo{volume}{12}, \bibinfo{number}{3}, \bibinfo{pages}{54--60}.
+\newblock
+
+
+\bibitem[Gervais et~al\mbox{.}(2016)]%
+        {gervais2016security}
+\bibfield{author}{\bibinfo{person}{Arthur Gervais}, \bibinfo{person}{Ghassan~O.
+  Karame}, \bibinfo{person}{Karl W{\"u}st}, \bibinfo{person}{Vasileios
+  Glykantzis}, \bibinfo{person}{Hubert Ritzdorf}, {and} \bibinfo{person}{Srdjan
+  Capkun}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{On the Security and Performance of Proof of Work
+  Blockchains}. In \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGSAC
+  Conference on Computer and Communications Security (CCS)}}.
+  \bibinfo{publisher}{ACM}, \bibinfo{pages}{3--16}.
+\newblock
+
+
+\bibitem[Gilad et~al\mbox{.}(2017)]%
+        {gilad2017algorand}
+\bibfield{author}{\bibinfo{person}{Yossi Gilad}, \bibinfo{person}{Rotem Hemo},
+  \bibinfo{person}{Silvio Micali}, \bibinfo{person}{Georgios Vlachos}, {and}
+  \bibinfo{person}{Nickolai Zeldovich}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Algorand: Scaling {Byzantine} Agreements for
+  Cryptocurrencies}. In \bibinfo{booktitle}{\emph{Proceedings of the 26th ACM
+  Symposium on Operating Systems Principles (SOSP)}}. \bibinfo{publisher}{ACM},
+  \bibinfo{pages}{51--68}.
+\newblock
+
+
+\bibitem[Jacobson(1988)]%
+        {jacobson1988congestion}
+\bibfield{author}{\bibinfo{person}{Van Jacobson}.}
+  \bibinfo{year}{1988}\natexlab{}.
+\newblock \showarticletitle{Congestion Avoidance and Control}.
+\newblock \bibinfo{journal}{\emph{ACM SIGCOMM Computer Communication Review}}
+  \bibinfo{volume}{18}, \bibinfo{number}{4} (\bibinfo{year}{1988}),
+  \bibinfo{pages}{314--329}.
+\newblock
+
+
+\bibitem[Kiayias et~al\mbox{.}(2018a)]%
+        {kiayias2020genesis}
+\bibfield{author}{\bibinfo{person}{Aggelos Kiayias} {et~al\mbox{.}}}
+  \bibinfo{year}{2018}\natexlab{a}.
+\newblock \showarticletitle{Ouroboros {Genesis}: Composable Proof-of-Stake
+  Blockchains with Dynamic Availability}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGSAC Conference on
+  Computer and Communications Security (CCS)}}. \bibinfo{publisher}{ACM},
+  \bibinfo{pages}{913--930}.
+\newblock
+
+
+\bibitem[Kiayias et~al\mbox{.}(2018b)]%
+        {kiayias2018ouroboros}
+\bibfield{author}{\bibinfo{person}{Aggelos Kiayias}, \bibinfo{person}{Alexander
+  Russell}, {et~al\mbox{.}}} \bibinfo{year}{2018}\natexlab{b}.
+\newblock \showarticletitle{Ouroboros {Praos}: An Adaptively-Secure,
+  Semi-Synchronous Proof-of-Stake Protocol}. In
+  \bibinfo{booktitle}{\emph{Advances in Cryptology -- {EUROCRYPT} 2018}}
+  \emph{(\bibinfo{series}{LNCS}, Vol.~\bibinfo{volume}{10821})}.
+  \bibinfo{publisher}{Springer}, \bibinfo{pages}{66--98}.
+\newblock
+
+
+\bibitem[Kiayias et~al\mbox{.}(2017)]%
+        {kiayias2017ouroboros}
+\bibfield{author}{\bibinfo{person}{Aggelos Kiayias}, \bibinfo{person}{Alexander
+  Russell}, \bibinfo{person}{Bernardo David}, {and} \bibinfo{person}{Roman
+  Oliynykov}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Ouroboros: A Provably Secure Proof-of-Stake
+  Blockchain Protocol}. In \bibinfo{booktitle}{\emph{Advances in Cryptology --
+  {CRYPTO} 2017}} \emph{(\bibinfo{series}{LNCS},
+  Vol.~\bibinfo{volume}{10401})}. \bibinfo{publisher}{Springer},
+  \bibinfo{pages}{357--388}.
+\newblock
+
+
+\bibitem[Kroll et~al\mbox{.}(2013)]%
+        {kroll2013economics}
+\bibfield{author}{\bibinfo{person}{Joshua~A. Kroll}, \bibinfo{person}{Ian~C.
+  Davey}, {and} \bibinfo{person}{Edward~W. Felten}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{The Economics of {Bitcoin} Mining, or {Bitcoin} in
+  the Presence of Adversaries}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  Workshop on the Economics of Information Security (WEIS)}}.
+\newblock
+
+
+\bibitem[Lamport et~al\mbox{.}(1982)]%
+        {lamport1982byzantine}
+\bibfield{author}{\bibinfo{person}{Leslie Lamport}, \bibinfo{person}{Robert
+  Shostak}, {and} \bibinfo{person}{Marshall Pease}.}
+  \bibinfo{year}{1982}\natexlab{}.
+\newblock \showarticletitle{The {Byzantine} Generals Problem}.
+\newblock \bibinfo{journal}{\emph{ACM Transactions on Programming Languages and
+  Systems}} \bibinfo{volume}{4}, \bibinfo{number}{3} (\bibinfo{year}{1982}),
+  \bibinfo{pages}{382--401}.
+\newblock
+
+
+\bibitem[Laszka et~al\mbox{.}(2020)]%
+        {lesniewski2020analysis}
+\bibfield{author}{\bibinfo{person}{Dawid Laszka}, \bibinfo{person}{Benjamin
+  Johnson}, {and} \bibinfo{person}{Jens Grossklags}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{A Game-Theoretic Analysis of Defense Strategies
+  Against {Sybil} Attacks}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  International Conference on Autonomous Agents and Multi-Agent Systems
+  (AAMAS)}}. \bibinfo{publisher}{IFAAMAS}.
+\newblock
+
+
+\bibitem[Levy(1984)]%
+        {levy1984capability}
+\bibfield{author}{\bibinfo{person}{Henry~M. Levy}.}
+  \bibinfo{year}{1984}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Capability-Based Computer Systems}}.
+\newblock \bibinfo{publisher}{Digital Press}.
+\newblock
+
+
+\bibitem[Li et~al\mbox{.}(2017)]%
+        {li2017sybilcontrol}
+\bibfield{author}{\bibinfo{person}{Jinyuan Li}, \bibinfo{person}{Dandan Feng},
+  {et~al\mbox{.}}} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{SybilControl}: Practical {Sybil} Defense with
+  Computational Puzzles}. In \bibinfo{booktitle}{\emph{Proceedings of the 7th
+  ACM Conference on Data and Application Security and Privacy (CODASPY)}}.
+  \bibinfo{publisher}{ACM}.
+\newblock
+
+
+\bibitem[Micali et~al\mbox{.}(1999)]%
+        {micali1999vrf}
+\bibfield{author}{\bibinfo{person}{Silvio Micali}, \bibinfo{person}{Michael
+  Rabin}, {and} \bibinfo{person}{Salil Vadhan}.}
+  \bibinfo{year}{1999}\natexlab{}.
+\newblock \showarticletitle{Verifiable Random Functions}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 40th Annual IEEE Symposium on
+  Foundations of Computer Science (FOCS)}}. \bibinfo{publisher}{IEEE},
+  \bibinfo{pages}{120--130}.
+\newblock
+
+
+\bibitem[Miller et~al\mbox{.}(2016)]%
+        {miller2016honeybadger}
+\bibfield{author}{\bibinfo{person}{Andrew Miller}, \bibinfo{person}{Yu Xia},
+  \bibinfo{person}{Kyle Croman}, \bibinfo{person}{Elaine Shi}, {and}
+  \bibinfo{person}{Dawn Song}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{The {Honey Badger} of {BFT} Protocols}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGSAC Conference on
+  Computer and Communications Security (CCS)}}. \bibinfo{publisher}{ACM},
+  \bibinfo{pages}{31--42}.
+\newblock
+
+
+\bibitem[Nakamoto(2008)]%
+        {nakamoto2008bitcoin}
+\bibfield{author}{\bibinfo{person}{Satoshi Nakamoto}.}
+  \bibinfo{year}{2008}\natexlab{}.
+\newblock \bibinfo{title}{Bitcoin: A Peer-to-Peer Electronic Cash System}.
+\newblock \bibinfo{howpublished}{\url{https://bitcoin.org/bitcoin.pdf}}.
+\newblock
+
+
+\bibitem[Narayanan et~al\mbox{.}(2016)]%
+        {narayanan2016bitcoinbook}
+\bibfield{author}{\bibinfo{person}{Arvind Narayanan}, \bibinfo{person}{Joseph
+  Bonneau}, \bibinfo{person}{Edward Felten}, \bibinfo{person}{Andrew Miller},
+  {and} \bibinfo{person}{Steven Goldfeder}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Bitcoin and Cryptocurrency Technologies}}.
+\newblock \bibinfo{publisher}{Princeton University Press}.
+\newblock
+
+
+\bibitem[Neudecker and Hartenstein(2019)]%
+        {neudecker2019network}
+\bibfield{author}{\bibinfo{person}{Till Neudecker} {and}
+  \bibinfo{person}{Hannes Hartenstein}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Network Layer Aspects of Permissionless
+  Blockchains}.
+\newblock \bibinfo{journal}{\emph{IEEE Communications Surveys \& Tutorials}}
+  \bibinfo{volume}{21}, \bibinfo{number}{1}, \bibinfo{pages}{838--857}.
+\newblock
+
+
+\bibitem[Pass and Shi(2017a)]%
+        {pass2017fruitchains}
+\bibfield{author}{\bibinfo{person}{Rafael Pass} {and} \bibinfo{person}{Elaine
+  Shi}.} \bibinfo{year}{2017}\natexlab{a}.
+\newblock \showarticletitle{{FruitChains}: A Fair Blockchain}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the ACM Symposium on Principles of
+  Distributed Computing (PODC)}}. \bibinfo{publisher}{ACM},
+  \bibinfo{pages}{315--324}.
+\newblock
+
+
+\bibitem[Pass and Shi(2017b)]%
+        {pass2017hybrid}
+\bibfield{author}{\bibinfo{person}{Rafael Pass} {and} \bibinfo{person}{Elaine
+  Shi}.} \bibinfo{year}{2017}\natexlab{b}.
+\newblock \showarticletitle{Hybrid Consensus: Efficient Consensus in the
+  Permission-less Model}. In \bibinfo{booktitle}{\emph{Proceedings of the 31st
+  International Symposium on Distributed Computing (DISC)}}.
+  \bibinfo{publisher}{Schloss Dagstuhl}, \bibinfo{pages}{39:1--39:19}.
+\newblock
+
+
+\bibitem[Pass and Shi(2017c)]%
+        {pass2016snowwhite}
+\bibfield{author}{\bibinfo{person}{Rafael Pass} {and} \bibinfo{person}{Elaine
+  Shi}.} \bibinfo{year}{2017}\natexlab{c}.
+\newblock \showarticletitle{The Sleepy Model of Consensus}. In
+  \bibinfo{booktitle}{\emph{Advances in Cryptology -- {ASIACRYPT} 2017}}
+  \emph{(\bibinfo{series}{LNCS}, Vol.~\bibinfo{volume}{10625})}.
+  \bibinfo{publisher}{Springer}, \bibinfo{pages}{380--409}.
+\newblock
+
+
+\bibitem[{Rated Network}(2023)]%
+        {lido2023concentration}
+\bibfield{author}{\bibinfo{person}{{Rated Network}}.}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Ethereum Staking Market Share and Validator
+  Distribution}.
+\newblock \bibinfo{howpublished}{Rated Network Analytics}.
+\newblock
+\newblock
+\shownote{Available at \url{https://www.rated.network/}. Accessed: December
+  2023}.
+
+
+\bibitem[Ren(2019)]%
+        {ren2019nakamoto}
+\bibfield{author}{\bibinfo{person}{Ling Ren}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Analysis of {Nakamoto} Consensus}. In
+  \bibinfo{booktitle}{\emph{Cryptology ePrint Archive, Report 2019/943}}.
+\newblock
+\newblock
+\shownote{Available at \url{https://eprint.iacr.org/2019/943}}.
+
+
+\bibitem[Resnick et~al\mbox{.}(2000)]%
+        {resnick2000reputation}
+\bibfield{author}{\bibinfo{person}{Paul Resnick}, \bibinfo{person}{Richard
+  Zeckhauser}, \bibinfo{person}{Eric Friedman}, {and} \bibinfo{person}{Ko
+  Kuwabara}.} \bibinfo{year}{2000}\natexlab{}.
+\newblock \showarticletitle{Reputation Systems}.
+\newblock \bibinfo{journal}{\emph{Commun. ACM}} \bibinfo{volume}{43},
+  \bibinfo{number}{12} (\bibinfo{year}{2000}), \bibinfo{pages}{45--48}.
+\newblock
+
+
+\bibitem[Rosenfeld(2011)]%
+        {rosenfeld2011analysis}
+\bibfield{author}{\bibinfo{person}{Meni Rosenfeld}.}
+  \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Analysis of {Bitcoin} Pooled Mining Reward
+  Systems}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1112.4980}}
+  (\bibinfo{year}{2011}).
+\newblock
+
+
+\bibitem[Rosenfeld(2014)]%
+        {rosenfeld2014analysis}
+\bibfield{author}{\bibinfo{person}{Meni Rosenfeld}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \bibinfo{title}{Analysis of Hash Rate-Based Double Spending}.
+\newblock \bibinfo{howpublished}{arXiv preprint arXiv:1402.2009}.
+\newblock
+\newblock
+\shownote{Available at \url{https://arxiv.org/abs/1402.2009}}.
+
+
+\bibitem[Saleh(2021)]%
+        {saleh2021blockchain}
+\bibfield{author}{\bibinfo{person}{Fahad Saleh}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Blockchain Without Waste: Proof-of-Stake}.
+\newblock \bibinfo{journal}{\emph{The Review of Financial Studies}}
+  \bibinfo{volume}{34}, \bibinfo{number}{3} (\bibinfo{year}{2021}),
+  \bibinfo{pages}{1156--1190}.
+\newblock
+
+
+\bibitem[{Tools for Humanity}(2023)]%
+        {worldcoin2023whitepaper}
+\bibfield{author}{\bibinfo{person}{{Tools for Humanity}}.}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Worldcoin: A Global Digital Identity and Inclusive
+  Financial Network}.
+\newblock \bibinfo{howpublished}{Worldcoin Whitepaper}.
+\newblock
+\newblock
+\shownote{Available at \url{https://whitepaper.worldcoin.org/}}.
+
+
+\bibitem[Wang et~al\mbox{.}(2019)]%
+        {wang2019attack}
+\bibfield{author}{\bibinfo{person}{Peng Wang}, \bibinfo{person}{Yuefeng Du},
+  {et~al\mbox{.}}} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Attacking Graph-Based {Sybil} Detection Schemes}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the Annual Computer Security
+  Applications Conference (ACSAC)}}. \bibinfo{publisher}{ACM}.
+\newblock
+
+
+\bibitem[Yu et~al\mbox{.}(2006)]%
+        {yu2006sybilguard}
+\bibfield{author}{\bibinfo{person}{Haifeng Yu}, \bibinfo{person}{Michael
+  Kaminsky}, \bibinfo{person}{Phillip~B. Gibbons}, {and}
+  \bibinfo{person}{Abraham Flaxman}.} \bibinfo{year}{2006}\natexlab{}.
+\newblock \showarticletitle{{SybilGuard}: Defending Against {Sybil} Attacks via
+  Social Networks}. In \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGCOMM
+  Conference on Applications, Technologies, Architectures, and Protocols for
+  Computer Communications}}. \bibinfo{publisher}{ACM},
+  \bibinfo{pages}{267--278}.
+\newblock
+
+
+\bibitem[Yu et~al\mbox{.}(2008)]%
+        {yu2008sybillimit}
+\bibfield{author}{\bibinfo{person}{Haifeng Yu}, \bibinfo{person}{Chenwei Shi},
+  \bibinfo{person}{Michael Kaminsky}, \bibinfo{person}{Phillip~B. Gibbons},
+  {and} \bibinfo{person}{Feng Xiao}.} \bibinfo{year}{2008}\natexlab{}.
+\newblock \showarticletitle{{SybilLimit}: A Near-Optimal Social Network Defense
+  Against {Sybil} Attacks}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  IEEE Symposium on Security and Privacy (S\&P)}}. \bibinfo{publisher}{IEEE},
+  \bibinfo{pages}{3--17}.
+\newblock
+
+
+\end{thebibliography}
